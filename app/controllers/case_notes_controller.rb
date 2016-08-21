@@ -1,0 +1,2 @@
+class CaseNotesController < ApplicationController
+end
