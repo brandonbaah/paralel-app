@@ -9,4 +9,7 @@ class ClientsController < ApplicationController
     @client = Client.find_by(id: params[:id])
     render "show.html.erb"
   end
+
+  def new
+  end
 end
