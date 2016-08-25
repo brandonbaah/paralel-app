@@ -1,7 +1,7 @@
 #Controller used to create manage clients
 class ClientsController < ApplicationController
   def index
-    @clients = Client.all
+    @clients = Client.order(:id)
     render "index.html.erb"
   end
 
@@ -11,5 +11,33 @@ class ClientsController < ApplicationController
   end
 
   def new
+    render "new.html.erb"
   end
+
+  def create
+    @client = Client.create(
+      name: params[:name],
+      address: params[:address],
+      birthdate: params[:birthdate],
+      phone: params[:phone]
+      )
+    redirect_to "/clients"
+  end
+
+  def edit
+    @client = Client.find_by(id: params[:id])
+    render "edit.html.erb"
+  end
+
+  def update
+    @client = Client.find_by(id: params[:id])
+    @client.update(
+      name: params[:name],
+      address: params[:address],
+      birthdate: params[:birthdate],
+      phone: params[:phone]
+      )
+      redirect_to "/clients"
+  end
+
 end

@@ -1,8 +1,8 @@
-S<h1>Clients</h1>
+<h1>Clients</h1>
 
 <%@clients.each do |client| %>
 <ul>
-  <h2><%= client.name %></h2>
+  <h2><%= client.id %>. <%= client.name %></h2>
   <li><%= client.address %></li>
   <li><%= client.phone %></li>
   <li><%= client.birthdate %></li>

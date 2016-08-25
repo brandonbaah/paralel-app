@@ -1,0 +1,23 @@
+<h1>Create New Client</h1>
+
+<%= form_tag("/clients", method: "post") do %>
+<div>
+  <h3><%= label_tag(:name) %></h3>
+  <%= text_field_tag(:name) %>
+</div>
+<div>
+  <h3><%= label_tag(:address) %></h3>
+  <%= text_field_tag(:address) %>
+</div>
+<div>
+  <h3><%= label_tag(:birthdate) %></h3>
+  <%= text_field_tag(:birthdate) %>
+</div>
+<div>
+  <h3><%= label_tag(:phone) %></h3>
+  <%= text_field_tag(:phone) %>
+</div>
+<div>
+  <h2><%= submit_tag("Create Client") %></h2>
+</div>
+<% end %>
