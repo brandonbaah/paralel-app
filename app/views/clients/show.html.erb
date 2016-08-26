@@ -1,4 +1,11 @@
 
-<h1><%= @client.name %></h1>
+<h1><%= @client.id %>: <%= @client.name %></h1>
+<h2><%= @client.user.role.position %>: <%= @client.user.first_name %> <%= @client.user.last_name %></h2>
 <h3><%= @client.address %></h3>
 <h3><%= @client.phone %></h3>
+<h3><% @client.case_notes.each do |case_note| %></h3>
+
+<h2>Recent Case Notes</h2>
+<h3><%= case_note.note %></h3>
+<h3><%= case_note.date %></h3>
+<% end %>

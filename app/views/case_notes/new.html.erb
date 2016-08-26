@@ -1,0 +1,22 @@
+<h1>Enter New Case Note</h1>
+
+<%= form_tag("/clients/#{@client.id}/casenotes", method: "post") do %>
+<div>
+  <%= hidden_field_tag(:client_id) %>
+</div>
+<div>
+  <h3><%= label_tag(:name) %></h3>
+  <%= text_field_tag(:name) %>
+</div>
+<div>
+  <h3><%= label_tag(:date) %></h3>
+  <%= text_field_tag(:date) %>
+</div>
+<div>
+  <h3><%= label_tag(:note) %></h3>
+  <%= text_field_tag(:note) %>
+</div>
+<div>
+  <h2><%= submit_tag("Create New Casenote") %></h2>
+</div>
+<% end %>
