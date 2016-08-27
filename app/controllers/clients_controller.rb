@@ -21,6 +21,7 @@ class ClientsController < ApplicationController
       birthdate: params[:birthdate],
       phone: params[:phone]
       )
+      flash[:success] = "Client: #{@client.name} was successfully created."
     redirect_to "/clients"
   end
 
@@ -37,7 +38,21 @@ class ClientsController < ApplicationController
       birthdate: params[:birthdate],
       phone: params[:phone]
       )
+      flash[:success] = "Client: #{@client.name} was successfully updated."
       redirect_to "/clients"
+  end
+
+  def destroy
+    @client = Client.find_by(id: params[:id])
+    @client.destroy(
+      id: params[:id],
+      name: params[:name],
+      address: params[:address],
+      birthdate: params[:birthdate],
+      phone: params[:phone]
+    )
+    flash[:success] = "#{@client.name} was successfully deleted."
+    render "/clients/#{@client.id}"
   end
 
 end

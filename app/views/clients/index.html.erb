@@ -1,6 +1,7 @@
 <h1>Clients</h1>
-
+  <div class="col-md-4 well">
 <%@clients.each do |client| %>
+<a href="/clients/<%= client.id %>">
 <ul>
   <h2><%= client.id %>. <%= client.name %></h2>
   <li><%= client.address %></li>
@@ -8,3 +9,4 @@
   <li><%= client.birthdate %></li>
 </ul>
 <% end %>
+<div>

@@ -3,9 +3,22 @@
 <h2><%= @client.user.role.position %>: <%= @client.user.first_name %> <%= @client.user.last_name %></h2>
 <h3><%= @client.address %></h3>
 <h3><%= @client.phone %></h3>
-<h3><% @client.case_notes.each do |case_note| %></h3>
 
-<h2>Recent Case Notes</h2>
-<h3><%= case_note.note %></h3>
-<h3><%= case_note.date %></h3>
-<% end %>
+<h4> Most Recent Visit </h4>
+<h3><%= @client.case_notes.last.date %></h3>
+
+<div>
+  Show Location
+</div>
+<div>
+<%= link_to "Back to All Clients", "/clients", class: "btn btn-success" %>
+</div>
+<div>
+<%= link_to "Case Note Index: #{@client.name}", "/clients/#{@client.id}/casenotes", class: "btn btn-success" %>
+</div>
+<div>
+<%= link_to "Update", "/clients/#{@client.id}/edit" %>
+</div>
+<div>
+<%= link_to "Delete", "/clients/#{@client.id}", method: "delete", class: "btn btn-danger" %>
+</div>

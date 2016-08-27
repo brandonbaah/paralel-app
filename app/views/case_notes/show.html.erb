@@ -1,3 +1,20 @@
 <h1><%= @case_note.client.name %></h1>
 <div><h3><%= @case_note.date %><h3></div>
 <div><h2><%= @case_note.note %><h2></div>
+
+<div>
+<%= link_to "#{@case_note.client.name}", "/clients/#{@case_note.client.id}", class: "btn btn-success" %>
+</div>
+<div>
+  <%= link_to "Case Note Index: #{@case_note.client.name}", "/clients/#{@case_note.client.id}/casenotes", class: "btn btn-success" %>
+</div>
+<div>
+<%= link_to "Back to All Clients", "/clients", class: "btn btn-success" %>
+</div>
+
+<div>
+<%= link_to "Update", "/clients/casenotes/#{@case_note.id}/edit", class: "btn btn-success" %>
+</div>
+<div>
+<%= link_to "Delete", "/clients/#{@case_note.id}/edit", method: "delete", class: "btn btn-danger" %>
+</div>

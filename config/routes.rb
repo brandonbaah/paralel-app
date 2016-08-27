@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/clients/:id' => 'clients#show'
   get '/clients/:id/edit' => 'clients#edit'
   patch '/clients' => 'clients#update'
+  delete 'clients/:id' => 'clients#destroy'
 
   get '/clients/:id/casenotes' => 'case_notes#index'
   get '/clients/:id/casenotes/new' => 'case_notes#new'
