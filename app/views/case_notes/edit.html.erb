@@ -1,0 +1,24 @@
+<h1> Case Note Update: <%= @casenote.client.name %></h1>
+
+<%= form_tag("/clients/#{@casenote.client.id}/casenotes", method: "patch") do %>
+  <div>
+    <%= hidden_field_tag(:casenote_id, @casenote.id) %>
+  </div>
+  <div>
+    <%= hidden_field_tag(:name, @casenote.client.name) %>
+  </div>
+  <div>
+    <h3>CNID: <%= @casenote.id %></h3>
+  </div>
+  <div>
+    <h3><%= label_tag(:date) %></h3>
+    <%= text_field_tag(:date, @casenote.date) %>
+  </div>
+  <div>
+    <h3><%= label_tag(:note) %></h3>
+    <%= text_field_tag(:note, @casenote.note) %>
+  </div>
+  <div>
+    <h2><%= submit_tag("Update New Casenote") %></h2>
+  </div>
+<% end %>

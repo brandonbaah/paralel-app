@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   patch '/clients' => 'clients#update'
 
   get '/clients/:id/casenotes' => 'case_notes#index'
-  get 'clients/:id/casenotes/new' => 'case_notes#new'
+  get '/clients/:id/casenotes/new' => 'case_notes#new'
   post '/clients/:id/casenotes' => 'case_notes#create'
+  get 'clients/casenotes/:id' => 'case_notes#show'
+  get 'clients/casenotes/:id/edit' => 'case_notes#edit'
+  patch 'clients/:id/casenotes' => 'case_notes#update'
 end
