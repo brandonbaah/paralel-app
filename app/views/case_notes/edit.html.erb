@@ -22,3 +22,13 @@
     <h2><%= submit_tag("Update New Casenote") %></h2>
   </div>
 <% end %>
+
+<div>
+<%= link_to "#{@casenote.client.name}", "/clients/#{@casenote.client.id}", class: "btn btn-success" %>
+</div>
+<div>
+  <%= link_to "Case Note Index: #{@casenote.client.name}", "/clients/#{@casenote.client.id}/casenotes", class: "btn btn-success" %>
+</div>
+<div>
+<%= link_to "Back to All Clients", "/clients", class: "btn btn-success" %>
+</div>

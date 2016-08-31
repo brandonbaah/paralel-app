@@ -14,6 +14,10 @@
 </div>
 
 
+
+<div>
+<%= link_to "New Case Note", "/clients/#{@client.id}/casenotes/new", class: "btn btn-success" %>
+</div>
 <%= link_to "#{@client.name}'s Profile", "/clients/#{@client.id}", class: "btn btn-success" %>
 <div>
 <%= link_to "Back to All Clients", "/clients", class: "btn btn-success" %>

@@ -44,13 +44,7 @@ class ClientsController < ApplicationController
 
   def destroy
     @client = Client.find_by(id: params[:id])
-    @client.destroy(
-      id: params[:id],
-      name: params[:name],
-      address: params[:address],
-      birthdate: params[:birthdate],
-      phone: params[:phone]
-    )
+    @client.destroy
     flash[:success] = "#{@client.name} was successfully deleted."
     render "/clients/#{@client.id}"
   end

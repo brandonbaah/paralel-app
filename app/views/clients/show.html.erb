@@ -1,11 +1,33 @@
 
 <h1><%= @client.id %>: <%= @client.name %></h1>
-<h2><%= @client.user.role.position %>: <%= @client.user.first_name %> <%= @client.user.last_name %></h2>
-<h3><%= @client.address %></h3>
-<h3><%= @client.phone %></h3>
+<h3><%= @client.user.role.position %>: <%= @client.user.first_name %> <%= @client.user.last_name %></h3>
+<h3>Address: <%= @client.address %></h3>
+<h3>Phone Number: <%= @client.phone %></h3>
 
-<h4> Most Recent Visit </h4>
-<h3><%= @client.case_notes.last.date %></h3>
+
+<h3>Most Recent Visit: <%= @client.case_notes.last.date %></h3>
+
+<div>
+  <h2>Short Term Goals</h2>
+  <% @client.check_lists.each do |check_list| %>
+  <li><h4><%= check_list.goal %></h4></li>
+  <% end %>
+</div>
+
+<%= form_tag("/clients/#{@casenote.client.id}", method: "post") do %>
+    <%= label_tag(:goal) %>
+    <%= text_field_tag(:goal) %>
+
+    <%= label_field_tag(:client_id) %>
+    <%= text_field_tag(:client_id) %>
+
+    <%= hidden_field_tag(:status) %>
+
+  <div>
+    <h2><%= submit_tag("Add Goal") %></h2>
+  </div>
+<% end %>
+
 
 <div>
   Show Location
