@@ -24,7 +24,8 @@ class CaseNotesController < ApplicationController
       )
       @client = Client.find_by(id: params[:id])
       @case_notes = @client.case_notes
-      redirect_to "/index.html.erb"
+      flash[:success] = "Client: #{@client.name}'s case note was successfully created."
+      redirect_to "/clients/#{@client.id}/casenotes"
   end
 
   def edit

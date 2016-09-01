@@ -4,8 +4,7 @@
 
 <div><h6><%= @case_note.date %><h6></div>
 <div><h5><%= @case_note.note %><h5></div>
-
-
+  
 <div>
   <%= link_to "Case Note Index: #{@case_note.client.name}", "/clients/#{@case_note.client.id}/casenotes", class: "btn btn-success" %>
 </div>

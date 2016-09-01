@@ -2,6 +2,7 @@
 class ClientsController < ApplicationController
   def index
     @clients = Client.order(:id)
+    @clients = Client.where(user_id: current_user.id)
     render "index.html.erb"
   end
 

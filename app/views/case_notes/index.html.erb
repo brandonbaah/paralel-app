@@ -13,11 +13,25 @@
   <% end %>
 </div>
 
+<h4> New Casenote </h4>
+  <%= form_tag("/clients/#{@client.id}/casenotes", method: "post") do %>
+    <div>
+      <%= hidden_field_tag(:client_id, @client.id) %>
+    </div>
+    <div>
+      <%= hidden_field_tag(:name, @client.name) %>
+    </div>
+    <div>
+      <%= text_field_tag(:date, nil, placeholder: "Date") %>
+    </div><br/>
+    <div>
+      <%= text_field_tag(:note, nil, placeholder: "Add Note") %>
+    </div>
+    <div>
+      <h6><%= submit_tag("Create New Casenote") %></h6>
+    </div>
+<% end %>
 
-
-<div>
-<%= link_to "New Case Note", "/clients/#{@client.id}/casenotes/new", class: "btn btn-success" %>
-</div>
 <%= link_to "#{@client.name}'s Profile", "/clients/#{@client.id}", class: "btn btn-success" %>
 <div>
 <%= link_to "Back to All Clients", "/clients", class: "btn btn-success" %>
