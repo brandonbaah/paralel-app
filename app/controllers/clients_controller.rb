@@ -49,4 +49,7 @@ class ClientsController < ApplicationController
     render "/clients/#{@client.id}"
   end
 
+  def forms
+  end
+
 end

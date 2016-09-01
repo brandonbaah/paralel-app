@@ -1,12 +1,10 @@
 <h1>Clients</h1>
-  <div class="col-md-4 well">
-<%@clients.each do |client| %>
-<a href="/clients/<%= client.id %>">
-<ul>
-  <h2><%= client.id %>. <%= client.name %></h2>
-  <li><%= client.address %></li>
-  <li><%= client.phone %></li>
-  <li><%= client.birthdate %></li>
-</ul>
-<% end %>
-<div>
+
+<div class="show_container">
+  <%@clients.each do |client| %>
+    <a href="/clients/<%= client.id %>">
+      <ul>
+        <h5><%= client.id %>. <%= client.name %></h5>
+      </ul>
+  <% end %>
+</div>

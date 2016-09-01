@@ -1,13 +1,13 @@
 
-<h1>Case Notes: <%= @client.name %></h1>
+<h3>Case Notes: <%= @client.name %></h3>
 
-<h3> Date of Last Visit: <%= @client.case_notes.last.date %></h3>
+<h5> Date of Last Visit: <%= @client.case_notes.last.date %></h5>
 
 <div class="row product-index">
   <% @client.case_notes.each do |case_note| %>
     <a href="/clients/casenotes/<%= case_note.id %>">
     <div>
-    <h3>Date: <%= case_note.date %></h3>
+    <h5>Date: <%= case_note.date %></h5>
     </div>
     </a>
   <% end %>

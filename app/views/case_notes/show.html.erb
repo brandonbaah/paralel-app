@@ -1,10 +1,11 @@
-<h1><%= @case_note.client.name %></h1>
-<div><h3><%= @case_note.date %><h3></div>
-<div><h2><%= @case_note.note %><h2></div>
-
 <div>
-<%= link_to "#{@case_note.client.name}", "/clients/#{@case_note.client.id}", class: "btn btn-success" %>
+<%= link_to "#{@case_note.client.name}", "/clients/#{@case_note.client.id}", class: "btn btn-info" %>
 </div>
+
+<div><h6><%= @case_note.date %><h6></div>
+<div><h5><%= @case_note.note %><h5></div>
+
+
 <div>
   <%= link_to "Case Note Index: #{@case_note.client.name}", "/clients/#{@case_note.client.id}/casenotes", class: "btn btn-success" %>
 </div>
