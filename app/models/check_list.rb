@@ -1,4 +1,5 @@
 class CheckList < ActiveRecord::Base
   belongs_to :user
   belongs_to :client
+  has_many :activities, as: :recordable
 end

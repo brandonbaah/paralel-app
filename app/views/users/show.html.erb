@@ -1,0 +1,17 @@
+
+<h2>Welcome <%= @user.first_name %></h2><br/>
+
+<h3> My Team </h3>
+  <% unless @boss == "" %>
+   <h5>My Boss: <%= @boss %></h5>
+  <% end %>
+
+  <% @user.managers.each do |manager| %>
+    <li><h4><%= manager.first_name %> <%= manager.last_name %></h4> <h5> <%= manager.role.position %></h5></li>
+  <% end %>
+  <br/>
+
+<h4>My Checklist</h4>
+  <% @user.check_lists.each do |check_list| %>
+    <h5><li><%= check_list.goal %></li></h5>
+  <% end %>

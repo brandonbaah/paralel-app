@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'signup' }
 
-  root 'clients#index'
+  root 'users#show'
+
+  get '/users/:id' => 'users#show'
 
   get '/clients' => 'clients#index'
   get '/clients/new' => 'clients#new'

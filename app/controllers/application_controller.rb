@@ -9,4 +9,11 @@ class ApplicationController < ActionController::Base
   def update_staff_check_list
     @checklist = CheckList.find_by(id: params[:id])
   end
+
+  def authorize_admin!
+    unless current_user && current_user.admin
+      flash[:warning] = "Not Authorized"
+      redirect_to '/'
+    end
+  end
 end
