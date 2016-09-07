@@ -6,13 +6,6 @@ class UsersController < ApplicationController
       @user = User.find_by(id: params[:id])
     else
       @user = current_user
-    end
-                                                                  #     if @user.supervisor
-                                                                  #       @boss = @user.supervisor.first_name
-                                                                  #     elsif @user.director
-                                                                  #       @boss = @user.director.first_name
-                                                                  #     else
-                                                                  #       @boss = ""
-                                                                  #     end
-    end
+    end                                                
+  end
 end

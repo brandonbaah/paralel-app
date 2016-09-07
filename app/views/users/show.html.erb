@@ -2,9 +2,9 @@
 <h2>Welcome <%= @user.first_name %></h2><br/>
 
 <h3> My Team </h3>
-  <% unless @boss == "" %>
-   <h5>My Boss: <%= @boss %></h5>
-  <% end %>
+  <h4><%= @user.director.first_name %> :<%= @user.director.role.position %></h4>
+  <h4><%= @user.supervisor.first_name %> :<%= @user.supervisor.role.position %></h4>
+
 
   <% @user.managers.each do |manager| %>
     <li><h4><%= manager.first_name %> <%= manager.last_name %></h4> <h5> <%= manager.role.position %></h5></li>

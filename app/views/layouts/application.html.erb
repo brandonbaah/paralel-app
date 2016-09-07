@@ -165,7 +165,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="/" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <% if current_user %>
@@ -222,7 +222,7 @@
         <li class="header">Headers</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Schedule</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Clients</span></a></li>
+        <li><%= link_to "My Clients", "/clients" %></i> <span></span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Team</span>
             <span class="pull-right-container">
