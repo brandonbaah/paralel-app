@@ -40,6 +40,13 @@ class ClientsController < ApplicationController
       phone: params[:phone]
       )
       flash[:success] = "Client: #{@client.name} was successfully updated."
+
+    Activity.create(
+      user_id: current_user.id,
+      event: "updated",
+      recordable_type: "Client",
+      recordable_id: client.id
+    )
       redirect_to "/clients"
   end
 
