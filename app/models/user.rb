@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :clients
   belongs_to :role
   has_many :activities, as: :recordable
+  has_many :actions, class_name: 'Activity'
 
   has_many :managers, class_name: "User",
                           foreign_key: "supervisor_id"

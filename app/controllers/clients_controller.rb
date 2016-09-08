@@ -22,7 +22,15 @@ class ClientsController < ApplicationController
       birthdate: params[:birthdate],
       phone: params[:phone]
       )
-      flash[:success] = "Client: #{@client.name} was successfully created."
+
+      Activity.create(
+        user_id: current_user.id,
+        event: "updated",
+        recordable_type: "Client",
+        recordable_id: @client.id
+      )
+
+    flash[:success] = "Client: #{@client.name} was successfully created."
     redirect_to "/clients"
   end
 
@@ -39,15 +47,15 @@ class ClientsController < ApplicationController
       birthdate: params[:birthdate],
       phone: params[:phone]
       )
-      flash[:success] = "Client: #{@client.name} was successfully updated."
 
     Activity.create(
       user_id: current_user.id,
       event: "updated",
       recordable_type: "Client",
-      recordable_id: client.id
+      recordable_id: @client.id
     )
-      redirect_to "/clients"
+    flash[:success] = "Client: #{@client.name} was successfully updated."
+    redirect_to "/clients"
   end
 
   def destroy
@@ -55,6 +63,14 @@ class ClientsController < ApplicationController
     @client.destroy
     flash[:success] = "#{@client.name} was successfully deleted."
     render "/clients/#{@client.id}"
+
+    Activity.create(
+      user_id: current_user.id,
+      event: "updated",
+      recordable_type: "Client",
+      recordable_id: @client.id
+    )
+
   end
 
   def forms
