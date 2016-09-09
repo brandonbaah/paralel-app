@@ -29,7 +29,7 @@ class CaseNotesController < ApplicationController
         user_id: current_user.id,
         event: "created",
         recordable_type: "CaseNote",
-        recordable_id: @client.id
+        recordable_id: @casenote.client.id
       )
       flash[:success] = "Client: #{@client.name}'s case note was successfully created."
       redirect_to "/clients/#{@client.id}/casenotes"
@@ -50,9 +50,23 @@ class CaseNotesController < ApplicationController
     Activity.create(
       user_id: current_user.id,
       event: "updated",
-      recordable_type: "CheckList",
-      recordable_id: @client.id
+      recordable_type: "CaseNote",
+      recordable_id: @casenote.client.id
     )
       redirect_to "/clients/#{@casenote.client.id}/casenotes"
+  end
+
+  def destroy
+    @casenote = CaseNote.find_by(id: params[:id])
+    @casenote.destroy
+    flash[:success] = "#{@client.name}'s case note was successfully deleted."
+    render "/clients/#{@casenote.client.id}/casenotes"
+
+    Activity.create(
+      user_id: current_user.id,
+      event: "deleted",
+      recordable_type: "CaseNote",
+      recordable_id: @casenote.client.id
+    )
   end
 end

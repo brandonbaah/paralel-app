@@ -20,7 +20,8 @@ class ClientsController < ApplicationController
       name: params[:name],
       address: params[:address],
       birthdate: params[:birthdate],
-      phone: params[:phone]
+      phone: params[:phone],
+      user_id: current_user.id
       )
 
       Activity.create(

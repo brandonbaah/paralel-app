@@ -45,7 +45,7 @@ class CheckListsController < ApplicationController
     Activity.create(
       user_id: current_user.id,
       event: "deleted",
-      recordable_type: "Client",
+      recordable_type: "CheckList",
       recordable_id: @client.id
     )
   end
