@@ -66,7 +66,7 @@ class ClientsController < ApplicationController
 
     Activity.create(
       user_id: current_user.id,
-      event: "updated",
+      event: "deleted",
       recordable_type: "Client",
       recordable_id: @client.id
     )

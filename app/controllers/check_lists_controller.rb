@@ -48,6 +48,5 @@ class CheckListsController < ApplicationController
       recordable_type: "Client",
       recordable_id: @client.id
     )
-
   end
 end
