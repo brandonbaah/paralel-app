@@ -4,41 +4,42 @@
   <h5>Address: <%= @client.address %></h5>
   <h5>Phone Number: <%= @client.phone %></h5>
 
-
-<h5>Most Recent Visit: <%= @client.case_notes.last.date %></h5>
-
-<h5>
-<%= link_to "Case Note Index: #{@client.name}", "/clients/#{@client.id}/casenotes", class: "btn btn-success" %>
-</h5><br/>
-
-<div>
-  <h4>Short Term Goals</h4>
-  <% @client.check_lists.each do |check_list| %>
-  <li><h5><%= check_list.goal %></h5></li>
+  <% unless @client.case_notes == [] %>
+    <h5>Most Recent Visit: <%= @client.case_notes.last.date %></h5>
   <% end %>
-</div><br/>
 
-
-<%= form_tag("/clients/#{@client.id}/casenotes", method: "post") do %>
-    <%= text_field_tag(:goal, nil, placeholder: "Add New Goal") %>
-
-    <%= hidden_field_tag(:client_id, @client.id)%>
-
-    <%= hidden_field_tag(:status) %>
+  <h5>
+    <%= link_to "Case Note Index: #{@client.name}", "/clients/#{@client.id}/casenotes", class: "btn btn-success" %>
+  </h5><br/>
 
   <div>
-    <h6><%= submit_tag("Add Goal") %></h6>
+    <h4>Short Term Goals</h4>
+    <% @client.check_lists.each do |check_list| %>
+    <li><h5><%= check_list.goal %></h5></li>
+    <% end %>
   </div><br/>
-<% end %>
 
-<div>
-<%= link_to "Back to All Clients", "/clients", class: "btn btn-success" %>
-</div>
 
-<div>
-<%= link_to "Update", "/clients/#{@client.id}/edit", class: "btn btn-success" %>
-</div><br/>
-<div>
-<%= link_to "Delete", "/clients/#{@client.id}", method: "delete", class: "btn btn-danger" %>
-</div>
+  <%= form_tag("/clients/#{@client.id}/casenotes", method: "post") do %>
+      <%= text_field_tag(:goal, nil, placeholder: "Add New Goal") %>
+
+      <%= hidden_field_tag(:client_id, @client.id)%>
+
+      <%= hidden_field_tag(:status) %>
+
+    <div>
+      <h6><%= submit_tag("Add Goal") %></h6>
+    </div><br/>
+  <% end %>
+
+  <div>
+    <%= link_to "Back to All Clients", "/clients", class: "btn btn-success" %>
+  </div>
+
+  <div>
+    <%= link_to "Update", "/clients/#{@client.id}/edit", class: "btn btn-success" %>
+  </div><br/>
+  <div>
+    <%= link_to "Delete", "/clients/#{@client.id}", method: "delete", class: "btn btn-danger" %>
+  </div>
 </div>
