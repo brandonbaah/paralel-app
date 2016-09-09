@@ -35,4 +35,19 @@ class CheckListsController < ApplicationController
     )
     flash[:success] = "Checklist Updated."
   end
+
+  def destroy
+    @client = Checklist.find_by(id: params[:id])
+    @client.destroy
+    flash[:success] = "#{@client.name}'s goal was successfully deleted."
+    render "/clients/#{@client.id}"
+
+    Activity.create(
+      user_id: current_user.id,
+      event: "deleted",
+      recordable_type: "Client",
+      recordable_id: @client.id
+    )
+
+  end
 end

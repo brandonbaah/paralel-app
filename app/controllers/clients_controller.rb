@@ -25,7 +25,7 @@ class ClientsController < ApplicationController
 
       Activity.create(
         user_id: current_user.id,
-        event: "updated",
+        event: "created",
         recordable_type: "Client",
         recordable_id: @client.id
       )
@@ -70,10 +70,5 @@ class ClientsController < ApplicationController
       recordable_type: "Client",
       recordable_id: @client.id
     )
-
   end
-
-  def forms
-  end
-
 end
