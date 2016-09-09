@@ -24,6 +24,13 @@ class CaseNotesController < ApplicationController
       )
       @client = Client.find_by(id: params[:id])
       @case_notes = @client.case_notes
+
+      Activity.create(
+        user_id: current_user.id,
+        event: "created",
+        recordable_type: "CaseNote",
+        recordable_id: @client.id
+      )
       flash[:success] = "Client: #{@client.name}'s case note was successfully created."
       redirect_to "/clients/#{@client.id}/casenotes"
   end
@@ -39,6 +46,12 @@ class CaseNotesController < ApplicationController
       client_id: params[:id],
       date: params[:date],
       note: params[:note]
+    )
+    Activity.create(
+      user_id: current_user.id,
+      event: "updated",
+      recordable_type: "CheckList",
+      recordable_id: @client.id
     )
       redirect_to "/clients/#{@casenote.client.id}/casenotes"
   end

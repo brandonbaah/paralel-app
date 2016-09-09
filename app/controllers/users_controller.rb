@@ -3,9 +3,10 @@ class UsersController < ApplicationController
 
   def show
     if current_user.admin
-      @user = User.find_by(id: params[:id])
+      # @admin = current_user
+      @user = User.find_by(id: params[:id] || current_user.id)
     else
       @user = current_user
-    end                                                
+    end
   end
 end

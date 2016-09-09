@@ -6,7 +6,7 @@ class CheckListsController < ApplicationController
 
   def create
     @checklist = CheckList.create(
-      user_id: session[:user_id],
+      user_id: current_user.id,
       client_id: params[:client_id],
       goal: params[:goal],
       status: "Pending"
