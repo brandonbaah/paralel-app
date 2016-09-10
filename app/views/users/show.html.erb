@@ -10,7 +10,7 @@
 <h3> My Team </h3>
   <% if @user.role.position == "Director" %>
     <% @user.supervisors.each do |supervisor| %>
-      <a href="/clients/<%= @user.id %>">
+      <a href="/users/<%= @user.id %>">
           <li><%= supervisor.first_name %> <%= supervisor.last_name %> (<%= supervisor.role.position %>)</li>
       </a>
     <% end %>

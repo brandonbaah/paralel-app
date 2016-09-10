@@ -10,5 +10,22 @@ class UsersController < ApplicationController
     end
   end
 
-  
+  def update
+    @user = current_user
+    @user = User.update(
+      email: params[:email],
+      first_name: params[:first_name],
+      last_name: params[:last_name]
+    )
+    Activity.create(
+      user_id: current_user.id,
+      event: "updated",
+      recordable_type: "User",
+      recordable_id: @user.id
+    )
+    flash[:success] = "#{@user.first_name}, your profile was successfully updated."
+    redirect_to "/"
+  end
+
+
 end
