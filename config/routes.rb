@@ -24,4 +24,6 @@ Rails.application.routes.draw do
 
   get '/users/:id/comment_form' => 'comments#new'
   post '/users/:id/comments' => 'comments#create'
+
+  get ''
 end
