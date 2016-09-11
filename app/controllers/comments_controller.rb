@@ -1,10 +1,11 @@
 class CommentsController < ApplicationController
-  def new
+  def create
     @comment = Comment.create(
     text: params[:text],
     activity_id: params[:activity_id],
-    user_id: params[:user_id]
+    user_id: current_user.id
     )
+    redirect_to '/'
   end
 
   def update
@@ -14,6 +15,7 @@ class CommentsController < ApplicationController
       activity_id: params[:activity_id],
       user_id: params[:user_id]
     )
+    redirect_to '/'
   end
 
   def destroy

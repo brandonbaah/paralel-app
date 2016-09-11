@@ -3,8 +3,17 @@
 
 <h3>News Feed</h3>
   <% @user.actions.each do |action| %>
-
     <h5><%= @user.first_name %> <%= action.event%> <%= action.recordable_type %> at <%= action.created_at %></h5>
+    <% action.comments.each do |comment| %>
+      <h6><%= comment.user.first_name %>: <%= comment.text %><h6>
+    <% end %>
+    <div>
+      <%= form_tag("/users/#{@user.id}/comments", method: "post") do %>
+      <%= text_field_tag(:text, nil, :placeholder => "Add Comment") %><%= submit_tag("Comment") %>
+      <%= hidden_field_tag(:activity_id, action.id) %>
+    </div>
+    <% end %>
+    <br/>
   <% end %>
 
 <h3> My Team </h3>

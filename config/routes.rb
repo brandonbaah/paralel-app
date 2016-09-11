@@ -20,4 +20,8 @@ Rails.application.routes.draw do
   get 'clients/casenotes/:id' => 'case_notes#show'
   get 'clients/casenotes/:id/edit' => 'case_notes#edit'
   patch 'clients/:id/casenotes' => 'case_notes#update'
+  delete 'clients/casenotes/:id' => 'case_notes#destroy'
+
+  get '/users/:id/comment_form' => 'comments#new'
+  post '/users/:id/comments' => 'comments#create'
 end
