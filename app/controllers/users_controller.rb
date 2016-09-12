@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authorize_admin!, except: [:show]
 
   def show
+    @posts = Post.all
     if current_user.admin
       # @admin = current_user
       @user = User.find_by(id: params[:id] || current_user.id)
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
       user_id: current_user.id,
       event: "updated",
       recordable_type: "User",
-      recordable_id: @user.id
+      recordable_id: current_user.id
     )
     flash[:success] = "#{@user.first_name}, your profile was successfully updated."
     redirect_to "/"

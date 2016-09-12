@@ -2,6 +2,7 @@
 <h2>Welcome <%= @user.first_name %></h2><br/>
 
 <h3>News Feed</h3>
+
   <% @user.actions.each do |action| %>
     <h5><%= @user.first_name %> <%= action.event%> <%= action.recordable_type %> at <%= action.created_at %></h5>
     <% action.comments.each do |comment| %>

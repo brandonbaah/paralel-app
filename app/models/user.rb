@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :check_lists
   has_many :clients
   has_many :comments
+  has_many :posts
   belongs_to :role
   has_many :activities, as: :recordable
   has_many :actions, class_name: 'Activity'
