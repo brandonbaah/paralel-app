@@ -7,7 +7,7 @@
   <% if activity.recordable_type == "Post" %>
     <h5><%= activity.user.first_name %>: <%= activity.display_text %> </h5>
   <% elsif activity.recordable_type == "CheckList" %>
-    <h5><%= activity.user.first_name %> <%= activity.event %> a goal for <%= activity.recordable.client.name %> at <%= activity.updated_at %></h5>
+    <h5><%= activity.user.first_name %> <%= activity.event %> a goal for <% if activity.recordable.client.user.first_name == current_user.first_name%><a href="/clients/<%= activity.recordable.client.id%>"><%= activity.recordable.client.name %></a><% else %> <%= activity.recordable.client.name %> <% end%> at <%= activity.updated_at %></h5>
     <h5>Goal: <%= activity.display_text %></h5>
   <% else %>
     <h5><%= activity.user.first_name %> <%= activity.event %> <%= activity.display_text %> <%= activity.recordable_type %> at <%= activity.updated_at %></h5>
@@ -18,7 +18,7 @@
   <div>
     <h6>
       <%= form_tag("/users/#{@user.id}/comments", method: "post") do %>
-        <%= text_field_tag(:text, nil, :placeholder => "Add Comment") %><%= submit_tag("Comment") %>
+        <%= text_field_tag(:text, nil, :placeholder => "Leave Comment") %><%= submit_tag("Comment") %>
         <%= hidden_field_tag(:activity_id, activity.id) %>
       <% end %>
     </h6>
