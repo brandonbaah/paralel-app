@@ -2,7 +2,7 @@ class Activity < ActiveRecord::Base
   belongs_to :recordable, polymorphic: true
   belongs_to :user
   has_many :comments
-
+  belongs_to :check_list
   def display_text
     if recordable_type == "User"
       return recordable.email

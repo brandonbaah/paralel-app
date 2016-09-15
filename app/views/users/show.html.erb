@@ -7,7 +7,7 @@
   <% if activity.recordable_type == "Post" %>
     <h5><%= activity.user.first_name %>: <%= activity.display_text %> </h5>
   <% elsif activity.recordable_type == "CheckList" %>
-    <h5><%= activity.user.first_name %> <%= activity.event %> a goal at <%= activity.updated_at %></h5>
+    <h5><%= activity.user.first_name %> <%= activity.event %> a goal for <%= activity.recordable.client.name %> at <%= activity.updated_at %></h5>
     <h5>Goal: <%= activity.display_text %></h5>
   <% else %>
     <h5><%= activity.user.first_name %> <%= activity.event %> <%= activity.display_text %> <%= activity.recordable_type %> at <%= activity.updated_at %></h5>
@@ -23,7 +23,6 @@
       <% end %>
     </h6>
   </div>
-    <br/>
 <% end %>
 
 
