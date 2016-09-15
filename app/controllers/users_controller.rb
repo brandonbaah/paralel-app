@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authorize_admin!, except: [:show]
 
   def show
+    @activities = Activity.order(updated_at: :desc).first(10)
     @posts = Post.all
     if current_user.admin
       # @admin = current_user

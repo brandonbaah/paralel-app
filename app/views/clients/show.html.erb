@@ -19,8 +19,7 @@
     <% end %>
   </div><br/>
 
-
-  <%= form_tag("/clients/#{@client.id}/casenotes", method: "post") do %>
+  <%= form_tag("/clients/#{@client.id}/checklists", method: "post") do %>
       <%= text_field_tag(:goal, nil, placeholder: "Add New Goal") %>
 
       <%= hidden_field_tag(:client_id, @client.id)%>

@@ -5,9 +5,10 @@ class CheckListsController < ApplicationController
   end
 
   def create
+    @client_id = params[:client_id]
     @checklist = CheckList.create(
       user_id: current_user.id,
-      client_id: params[:client_id],
+      client_id: @client_id,
       goal: params[:goal],
       status: "Pending"
     )
@@ -15,9 +16,10 @@ class CheckListsController < ApplicationController
       user_id: current_user.id,
       event: "created",
       recordable_type: "CheckList",
-      recordable_id: @client.id
+      recordable_id: @client_id
     )
     flash[:success] = "New Task Created."
+    redirect_to "/clients/" + @client_id
   end
 
   def update

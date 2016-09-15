@@ -1,21 +1,30 @@
 
 <h2>Welcome <%= @user.first_name %></h2><br/>
 
-<h3>News Feed</h3>
 
-  <% @user.actions.each do |action| %>
-    <h5><%= @user.first_name %> <%= action.event%> <%= action.recordable_type %> at <%= action.created_at %></h5>
-    <% action.comments.each do |comment| %>
-      <h6><%= comment.user.first_name %>: <%= comment.text %><h6>
-    <% end %>
-    <div>
-      <%= form_tag("/users/#{@user.id}/comments", method: "post") do %>
-      <%= text_field_tag(:text, nil, :placeholder => "Add Comment") %><%= submit_tag("Comment") %>
-      <%= hidden_field_tag(:activity_id, action.id) %>
-    </div>
-    <% end %>
-    <br/>
+<h3>News Feed</h3>
+<% @activities.each do |activity| %>
+  <% if activity.recordable_type == "Post" %>
+    <h5><%= activity.user.first_name %>: <%= activity.display_text %> </h5>
+  <% else %>
+  <p><%= activity.id %>/<%= activity.event %>/<%= activity.display_text %></p>
+    <h5><%= activity.user.first_name %> <%= activity.event %> <%= activity.display_text %> <%= activity.recordable_type %> at <%= activity.updated_at %></h5>
   <% end %>
+  <% activity.comments.each do |comment| %>
+    <h6><%= comment.user.first_name %>: <%= comment.text %><h6>
+  <% end %>
+  <div>
+    <h6>
+      <%= form_tag("/users/#{@user.id}/comments", method: "post") do %>
+        <%= text_field_tag(:text, nil, :placeholder => "Add Comment") %><%= submit_tag("Comment") %>
+        <%= hidden_field_tag(:activity_id, activity.id) %>
+      <% end %>
+    </h6>
+  </div>
+    <br/>
+<% end %>
+
+
 
 <h3> My Team </h3>
   <% if @user.role.position == "Director" %>

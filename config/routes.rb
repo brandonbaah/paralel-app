@@ -24,4 +24,7 @@ Rails.application.routes.draw do
 
   get '/users/:id/comment_form' => 'comments#new'
   post '/users/:id/comments' => 'comments#create'
+
+  get '/clients/:id/checklists/new' => 'check_lists#new'
+  post 'clients/:id/checklists' => 'check_lists#create'
 end
