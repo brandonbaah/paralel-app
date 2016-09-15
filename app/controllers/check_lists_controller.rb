@@ -16,7 +16,7 @@ class CheckListsController < ApplicationController
       user_id: current_user.id,
       event: "created",
       recordable_type: "CheckList",
-      recordable_id: @client_id
+      recordable_id: @checklist.id
     )
     flash[:success] = "New Task Created."
     redirect_to "/clients/" + @client_id

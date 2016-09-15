@@ -6,8 +6,10 @@
 <% @activities.each do |activity| %>
   <% if activity.recordable_type == "Post" %>
     <h5><%= activity.user.first_name %>: <%= activity.display_text %> </h5>
+  <% elsif activity.recordable_type == "CheckList" %>
+    <h5><%= activity.user.first_name %> <%= activity.event %> a goal at <%= activity.updated_at %></h5>
+    <h5>Goal: <%= activity.display_text %></h5>
   <% else %>
-  <p><%= activity.id %>/<%= activity.event %>/<%= activity.display_text %></p>
     <h5><%= activity.user.first_name %> <%= activity.event %> <%= activity.display_text %> <%= activity.recordable_type %> at <%= activity.updated_at %></h5>
   <% end %>
   <% activity.comments.each do |comment| %>
