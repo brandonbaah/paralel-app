@@ -1,4 +1,4 @@
-<div class="show2_container">
+
   <h3><%= @client.name %></h3>
   <h5><%= @client.user.role.position %>: <%= @client.user.first_name %> <%= @client.user.last_name %></h5>
   <h5>Address: <%= @client.address %></h5>
@@ -31,6 +31,26 @@
     </div><br/>
   <% end %>
 
+<style>
+
+  #map {
+    height: 200px;
+    width: 250px;
+  }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: -34.397, lng: 150.644},
+      zoom: 18
+    });
+  }
+</script>
+
   <div>
     <%= link_to "Back to All Clients", "/clients", class: "btn btn-success" %>
   </div>
@@ -41,4 +61,3 @@
   <div>
     <%= link_to "Delete", "/clients/#{@client.id}", method: "delete", class: "btn btn-danger" %>
   </div>
-</div>

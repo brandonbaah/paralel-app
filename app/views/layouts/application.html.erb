@@ -355,6 +355,8 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
+
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['API_KEY']}&callback=initMap", async: true, defer: true  %>
 <!-- AdminLTE App -->
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
