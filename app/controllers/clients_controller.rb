@@ -16,12 +16,15 @@ class ClientsController < ApplicationController
   end
 
   def create
+    coordinates = Geocoder.coordinates(params[:address])
     @client = Client.create(
       name: params[:name],
       address: params[:address],
       birthdate: params[:birthdate],
       phone: params[:phone],
-      user_id: current_user.id
+      user_id: current_user.id,
+      longitude: coordinates[0],
+      latitude: coordinates[1]
       )
 
       Activity.create(
@@ -41,14 +44,18 @@ class ClientsController < ApplicationController
   end
 
   def update
+    binding.pry
     @client = Client.find_by(id: params[:id])
-    @client.update(
+    coordinates = Geocoder.coordinates(params[:address])
+    @client = Client.update(
       name: params[:name],
       address: params[:address],
       birthdate: params[:birthdate],
-      phone: params[:phone]
+      phone: params[:phone],
+      user_id: current_user.id,
+      longitude: coordinates[0],
+      latitude: coordinates[1]
       )
-
     Activity.create(
       user_id: current_user.id,
       event: "updated",
