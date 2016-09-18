@@ -27,4 +27,16 @@ Rails.application.routes.draw do
 
   get '/clients/:id/checklists/new' => 'check_lists#new'
   post 'clients/:id/checklists' => 'check_lists#create'
+
+  namespace :api do
+    namespace :v1 do
+      get '/clients' => 'clients#index'
+      get '/clients/new' => 'clients#new'
+      post '/clients' => 'clients#create'
+      get '/clients/:id' => 'clients#show'
+      get '/clients/:id/edit' => 'clients#edit'
+      patch '/clients' => 'clients#update'
+      delete 'clients/:id' => 'clients#destroy'
+    end
+  end
 end
