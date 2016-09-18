@@ -1,63 +1,65 @@
+<div ng-app="app">
+  <div ng-controller="clientsCtrl">
+    <h3><%= @client.name %></h3>
+    <h5><%= @client.user.role.position %>: <%= @client.user.first_name %> <%= @client.user.last_name %></h5>
+    <h5>Address: <%= @client.address %></h5>
+    <h5>Phone Number: <%= @client.phone %></h5>
 
-  <h3><%= @client.name %></h3>
-  <h5><%= @client.user.role.position %>: <%= @client.user.first_name %> <%= @client.user.last_name %></h5>
-  <h5>Address: <%= @client.address %></h5>
-  <h5>Phone Number: <%= @client.phone %></h5>
-
-  <% unless @client.case_notes == [] %>
-    <h5>Most Recent Visit: <%= @client.case_notes.last.date %></h5>
-  <% end %>
-
-  <h5>
-    <%= link_to "Case Note Index: #{@client.name}", "/clients/#{@client.id}/casenotes", class: "btn btn-success" %>
-  </h5><br/>
-
-  <div>
-    <h4>Short Term Goals</h4>
-    <% @client.check_lists.each do |check_list| %>
-    <li><h5><%= check_list.goal %></h5></li>
+    <% unless @client.case_notes == [] %>
+      <h5>Most Recent Visit: <%= @client.case_notes.last.date %></h5>
     <% end %>
-  </div><br/>
 
-  <%= form_tag("/clients/#{@client.id}/checklists", method: "post") do %>
-      <%= text_field_tag(:goal, nil, placeholder: "Add New Goal") %>
-
-      <%= hidden_field_tag(:client_id, @client.id)%>
-
-      <%= hidden_field_tag(:status) %>
+    <h5>
+      <%= link_to "Case Note Index: #{@client.name}", "/clients/#{@client.id}/casenotes", class: "btn btn-success" %>
+    </h5><br/>
 
     <div>
-      <h6><%= submit_tag("Add Goal") %></h6>
+      <h4>Short Term Goals</h4>
+      <% @client.check_lists.each do |check_list| %>
+      <li><h5><%= check_list.goal %></h5></li>
+      <% end %>
     </div><br/>
-  <% end %>
 
-<style>
+    <%= form_tag("/clients/#{@client.id}/checklists", method: "post") do %>
+        <%= text_field_tag(:goal, nil, placeholder: "Add New Goal") %>
 
-  #map {
-    height: 200px;
-    width: 250px;
-  }
-</style>
-</head>
-<body>
-<div id="map"></div>
-<script>
-  var map;
-  function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: -34.397, lng: 150.644},
-      zoom: 18
-    });
-  }
-</script>
+        <%= hidden_field_tag(:client_id, @client.id)%>
 
-  <div>
-    <%= link_to "Back to All Clients", "/clients", class: "btn btn-success" %>
+        <%= hidden_field_tag(:status) %>
+
+      <div>
+        <h6><%= submit_tag("Add Goal") %></h6>
+      </div><br/>
+    <% end %>
+
+  <style>
+    #map {
+      height: 200px;
+      width: 250px;
+    }
+  </style>
+  </head>
+  <body>
+  <div id="map"></div>
+  <script>
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: @client.latitude, lng: 150.644},
+        zoom: 18
+      });
+    }
+  </script>
+
+    <div>
+      <%= link_to "Back to All Clients", "/clients", class: "btn btn-success" %>
+    </div>
+
+    <div>
+      <%= link_to "Update", "/clients/#{@client.id}/edit", class: "btn btn-success" %>
+    </div><br/>
+    <div>
+      <%= link_to "Delete", "/clients/#{@client.id}", method: "delete", class: "btn btn-danger" %>
+    </div>
   </div>
-
-  <div>
-    <%= link_to "Update", "/clients/#{@client.id}/edit", class: "btn btn-success" %>
-  </div><br/>
-  <div>
-    <%= link_to "Delete", "/clients/#{@client.id}", method: "delete", class: "btn btn-danger" %>
-  </div>
+</div>

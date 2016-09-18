@@ -44,10 +44,9 @@ class ClientsController < ApplicationController
   end
 
   def update
-    binding.pry
     @client = Client.find_by(id: params[:id])
     coordinates = Geocoder.coordinates(params[:address])
-    @client = Client.update(
+    @client.update(
       name: params[:name],
       address: params[:address],
       birthdate: params[:birthdate],
