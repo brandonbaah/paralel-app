@@ -1,0 +1,4 @@
+<h4>My Checklist</h4>
+  <% @user.check_lists.each do |check_list| %>
+    <h5><li><%= check_list.goal %></li></h5>
+  <% end %>

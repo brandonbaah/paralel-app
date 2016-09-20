@@ -28,5 +28,9 @@ class UsersController < ApplicationController
     redirect_to "/"
   end
 
+  def user_tasks
+    @user = current_user
+  end
+
 
 end
