@@ -78,4 +78,8 @@ class ClientsController < ApplicationController
       recordable_id: @client.id
     )
   end
+
+  def client_maps
+    @clients = Client.where(user_id: current_user.id)
+  end
 end
