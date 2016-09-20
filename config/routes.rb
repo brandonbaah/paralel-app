@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'users#show'
 
+  get '/tasks' => 'users#user_tasks'
   get '/users/:id' => 'users#show'
 
   get '/clients' => 'clients#index'
