@@ -41,8 +41,7 @@
 
     $scope.dayLog = function() {
       var map;
-      $http.get('/api/v1/clients.json').then(function(response){
-        
+      $http.get('/api/v1/visits.json').then(function(response){
         map = new google.maps.Map(document.getElementById('dailyMap'), {
           center: {lat: response.data[0].latitude, lng: response.data[0].longitude},
           zoom: 11
