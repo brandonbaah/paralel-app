@@ -47,6 +47,11 @@
     });
   };
 
+  $scope.clientVisit = function(person) {
+    $scope.visits = []
+    client.visit_today = !client.visit_today;
+
+  };
 
   });
 }());

@@ -1,3 +1,8 @@
+<div ng-app="app">
+  <div ng-controller="usersCtrl">
+
+    {{1 + 1}}
+
 
 <h2>Welcome <%= @user.first_name %></h2><br/>
 
@@ -53,3 +58,6 @@
   <% @user.check_lists.each do |check_list| %>
     <h5><li><%= check_list.goal %></li></h5>
   <% end %>
+
+  </div>
+</div>

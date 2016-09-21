@@ -9,6 +9,7 @@
         <h5>CID:<%= client.id %> <%= client.name %></h5>
       </ul>
     </a>
+    <ul><%= link_to "Add Schedule", "/visits/#{client.id}", method: 'patch' %></ul>
   <% end %>
 </div>
 <!-- </div> -->
