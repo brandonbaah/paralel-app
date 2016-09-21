@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
       get '/activities' => 'activities#index'
 
+      get '/visits' => 'clients#visits'
       get '/clients' => 'clients#index'
       get '/clients/new' => 'clients#new'
       post '/clients' => 'clients#create'
