@@ -78,4 +78,19 @@ class ClientsController < ApplicationController
       recordable_id: @client.id
     )
   end
+
+  def client_maps
+    @clients = Client.where(user_id: current_user.id)
+  end
+
+  def visits
+    @clients = Client.where(user_id: current_user.id, visit_today: true  )
+  end
+
+  def visit_update
+    @client = Client.find_by(id: params[:id])
+    @client.visit_today = !@client.visit_today
+    @client.save
+    redirect_to "/clients/#{@client.id}"
+  end
 end

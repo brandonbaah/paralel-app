@@ -27,7 +27,7 @@
 
 
   <div class="container">
-    <h2>Client Goals</h2>
+    <h4>Client Goals</h4>
     <h5 type="button" class="btn btn-info" style="cursor: pointer;"  data-toggle="collapse" data-target="#goals">View Goals</h5>
     <div id="goals" class="collapse">
       <% @client.check_lists.each do |check_list| %>
@@ -48,8 +48,7 @@
         <h6><%= submit_tag("Add Goal") %></h6>
       </div><br/>
     <% end %>
-
-
+      <%= link_to "Visit Client Today", "/visits/#{@client.id}", method: 'patch' %>
     <div>
       <%= link_to "Back to All Clients", "/clients", class: "btn btn-success" %>
     </div>

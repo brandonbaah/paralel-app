@@ -1,0 +1,12 @@
+<div ng-app="app">
+  <div ng-controller="clientsCtrl" ng-init="clientIndex()">
+    <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+    <style>
+      #clientMap {
+        height: 800px;
+        width: 1025px;
+      }
+    </style>
+    <div id="clientMap"></div>
+  </div>
+</div>

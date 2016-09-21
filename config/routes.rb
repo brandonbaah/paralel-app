@@ -7,13 +7,15 @@ Rails.application.routes.draw do
   get '/users/:id' => 'users#show'
 
   get '/clients' => 'clients#index'
+  get '/visits' => 'clients#visits'
+  patch '/visits/:id' => 'clients#visit_update'
+  get '/caseload' => 'clients#client_maps'
   get '/clients/new' => 'clients#new'
   post '/clients' => 'clients#create'
   get '/clients/:id' => 'clients#show'
   get '/clients/:id/edit' => 'clients#edit'
   patch '/clients' => 'clients#update'
   delete 'clients/:id' => 'clients#destroy'
-  get '/forms' => 'clients#forms'
 
   get '/clients/:id/casenotes' => 'case_notes#index'
   get '/clients/:id/casenotes/new' => 'case_notes#new'
@@ -31,6 +33,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get '/users/:id' => 'users#show'
+
+      get '/activities' => 'activities#index'
+
       get '/clients' => 'clients#index'
       get '/clients/new' => 'clients#new'
       post '/clients' => 'clients#create'
