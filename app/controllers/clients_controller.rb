@@ -24,7 +24,8 @@ class ClientsController < ApplicationController
       phone: params[:phone],
       user_id: current_user.id,
       longitude: coordinates[0],
-      latitude: coordinates[1]
+      latitude: coordinates[1],
+      visit_today: false
       )
 
       Activity.create(
@@ -53,7 +54,7 @@ class ClientsController < ApplicationController
       phone: params[:phone],
       user_id: current_user.id,
       longitude: coordinates[0],
-      latitude: coordinates[1]
+      latitude: coordinates[1],
       )
     Activity.create(
       user_id: current_user.id,
