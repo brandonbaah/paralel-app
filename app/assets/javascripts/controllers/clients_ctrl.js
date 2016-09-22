@@ -21,6 +21,12 @@
       });
     };
 
+    $scope.clientList = function() {
+    $http.get('/api/v1/clients.json').then(function(response) {
+      $scope.clients = response.data;
+    });
+  }
+
     $scope.clientIndex = function() {
       var map;
       $http.get('/api/v1/clients.json').then(function(response){
@@ -30,11 +36,17 @@
         });
         $scope.clients = response.data
         $scope.clients.forEach(function(client) {
+          var infowindow = new google.maps.infowindow({
+            content: client.name
+          });
           var marker = new google.maps.Marker({
             position: {lat: client.latitude, lng: client.longitude},
             title: client.name
           });
           marker.setMap(map);
+          google.maps.event.addListener('click', function (){
+            InfoWindow.open(map,marker);
+          });
         });
       });
     };
@@ -66,10 +78,8 @@
     });
   };
 
-  $scope.clientVisit = function(person) {
-    $scope.visits = []
+  $scope.toggleVisit = function(person) {
     client.visit_today = !client.visit_today;
-
   };
 
   });

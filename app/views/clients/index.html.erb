@@ -1,42 +1,39 @@
-<!-- <section>
-<div id="one"> -->
-<h1>Clients</h1>
 
-<div class="show_container">
-  <%@clients.each do |client| %>
-    <a href="/clients/<%= client.id %>">
-      <ul>
-        <h5>CID:<%= client.id %> <%= client.name %></h5>
-      </ul>
-    </a>
-    <ul><%= link_to "Add Schedule", "/visits/#{client.id}", method: 'patch' %></ul>
-  <% end %>
-</div>
-<!-- </div> -->
+<div ng-app="app">
+  <div ng-controller="clientsCtrl" ng-init="clientList()">
+  <h1>Clients</h1>
 
-<!-- <div id="two"> -->
-<h4>Create New Client</h4>
+  <div class="show_container">
+    <div ng-repeat="client in clients">
+      <a ng-href="/clients/{{client.id}}">
+        {{client.id}} {{client.name}}
+      </a>
+        <a ng-href="/visits/{{client.id}}", method: 'patch'>Add Schedule</a>
+    </div>
+  </div>
 
-<%= form_tag("/clients", method: "post") do %>
-<div>
-  <h5><%= label_tag(:name) %></h5>
-  <%= text_field_tag(:name) %>
+    <h4>Create New Client</h4>
+
+    <%= form_tag("/clients", method: "post") do %>
+    <div>
+      <h5><%= label_tag(:name) %></h5>
+      <%= text_field_tag(:name) %>
+    </div>
+    <div>
+      <h5><%= label_tag(:address) %></h5>
+      <%= text_field_tag(:address) %>
+    </div>
+    <div>
+      <h5><%= label_tag(:birthdate) %></h5>
+      <%= text_field_tag(:birthdate) %>
+    </div>
+    <div>
+      <h5><%= label_tag(:phone) %></h5>
+      <%= text_field_tag(:phone) %>
+    </div>
+    <div>
+      <h5><%= submit_tag("Create Client") %></h5>
+    </div>
+    <% end %>
+  </div>
 </div>
-<div>
-  <h5><%= label_tag(:address) %></h5>
-  <%= text_field_tag(:address) %>
-</div>
-<div>
-  <h5><%= label_tag(:birthdate) %></h5>
-  <%= text_field_tag(:birthdate) %>
-</div>
-<div>
-  <h5><%= label_tag(:phone) %></h5>
-  <%= text_field_tag(:phone) %>
-</div>
-<div>
-  <h5><%= submit_tag("Create Client") %></h5>
-</div>
-<% end %>
-<!-- </div>
-</section> -->
