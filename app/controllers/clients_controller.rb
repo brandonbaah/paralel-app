@@ -91,6 +91,9 @@ class ClientsController < ApplicationController
     @client = Client.find_by(id: params[:id])
     @client.visit_today = !@client.visit_today
     @client.save
-    redirect_to "/clients/#{@client.id}"
+    redirect_to "/clients"
+  end
+
+  def trips
   end
 end

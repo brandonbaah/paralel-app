@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get '/clients' => 'clients#index'
   get '/visits' => 'clients#visits'
+  get '/trips' => 'clients#trips'
   patch '/visits/:id' => 'clients#visit_update'
   get '/caseload' => 'clients#client_maps'
   get '/clients/new' => 'clients#new'
