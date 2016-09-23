@@ -6,4 +6,8 @@ class Client < ActiveRecord::Base
 
   geocoded_by :address
   after_validation :geocode
+
+  def visits
+    @clients = Client.where(user_id: current_user.id, visit_today: true)
+  end
 end

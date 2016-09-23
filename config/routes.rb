@@ -3,11 +3,14 @@ Rails.application.routes.draw do
 
   root 'users#show'
 
+  get '/home' => 'users#home'
+
   get '/tasks' => 'users#user_tasks'
   get '/users/:id' => 'users#show'
 
   get '/clients' => 'clients#index'
   get '/visits' => 'clients#visits'
+  get '/trips' => 'clients#trips'
   patch '/visits/:id' => 'clients#visit_update'
   get '/caseload' => 'clients#client_maps'
   get '/clients/new' => 'clients#new'
@@ -43,7 +46,7 @@ Rails.application.routes.draw do
       post '/clients' => 'clients#create'
       get '/clients/:id' => 'clients#show'
       get '/clients/:id/edit' => 'clients#edit'
-      patch '/clients' => 'clients#update'
+      patch '/clients' => 'clients#visit_update'
       delete 'clients/:id' => 'clients#destroy'
     end
   end

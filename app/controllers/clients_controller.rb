@@ -24,7 +24,8 @@ class ClientsController < ApplicationController
       phone: params[:phone],
       user_id: current_user.id,
       longitude: coordinates[0],
-      latitude: coordinates[1]
+      latitude: coordinates[1],
+      visit_today: false
       )
 
       Activity.create(
@@ -53,7 +54,7 @@ class ClientsController < ApplicationController
       phone: params[:phone],
       user_id: current_user.id,
       longitude: coordinates[0],
-      latitude: coordinates[1]
+      latitude: coordinates[1],
       )
     Activity.create(
       user_id: current_user.id,
@@ -84,13 +85,16 @@ class ClientsController < ApplicationController
   end
 
   def visits
-    @clients = Client.where(user_id: current_user.id, visit_today: true  )
+    @clients = Client.where(user_id: current_user.id, visit_today: true)
   end
 
   def visit_update
     @client = Client.find_by(id: params[:id])
     @client.visit_today = !@client.visit_today
     @client.save
-    redirect_to "/clients/#{@client.id}"
+    redirect_to "/clients"
+  end
+
+  def trips
   end
 end
