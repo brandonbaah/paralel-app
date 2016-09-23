@@ -14,3 +14,10 @@ json.activities @user.actions.each do |action|
   json.recordable_type action.recordable_type
   json.user_id action.user_id
 end
+
+json.check_lists @user.check_lists.each do |check_list|
+json.id check_list.id
+json.goal check_list.goal
+json.client_id check_list.client_id
+json.user_id check_list.user_id
+end

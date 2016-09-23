@@ -31,8 +31,9 @@ class UsersController < ApplicationController
     redirect_to "/"
   end
 
-  def user_tasks
-    @user = current_user
+  def uncompleted_tasks
+    @uncompleted_tasks = (CheckList.where(user_id: current_user.id, complete: false)
+    @percentage = (CheckList.where(user_id: current_user.id, complete: true).length / current_user.check_lists.length) * 100
   end
 
 
