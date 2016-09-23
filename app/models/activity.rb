@@ -1,4 +1,4 @@
-class Activity < ActiveRecord::Base
+class Activity < ApplicationRecord
   belongs_to :recordable, polymorphic: true
   belongs_to :user
   has_many :comments

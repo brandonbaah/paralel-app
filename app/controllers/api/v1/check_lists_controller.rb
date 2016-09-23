@@ -50,5 +50,5 @@ class Api::V1::CheckListsController < ApplicationController
       recordable_type: "CheckList",
       recordable_id: @client.id
     )
-end
+  end
 end

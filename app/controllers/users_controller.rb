@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false)
+    @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
     @activities = Activity.order(updated_at: :desc).first(6)
     if current_user.admin
       # @admin = current_user
@@ -32,9 +34,7 @@ class UsersController < ApplicationController
   end
 
   def uncompleted_tasks
-    @uncompleted_tasks = (CheckList.where(user_id: current_user.id, complete: false)
+    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false)
     @percentage = (CheckList.where(user_id: current_user.id, complete: true).length / current_user.check_lists.length) * 100
   end
-
-
 end
