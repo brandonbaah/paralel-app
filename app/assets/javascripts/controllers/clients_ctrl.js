@@ -123,17 +123,23 @@
     }
 
 
-
     $scope.addClient = function(client) {
-    $http.post('/api/v1/clients.json', client).success(function(response) {
-      $scope.clients.push(client);
-      $scope.client = {};
+      console.log("some thing")
+      $http.post('/api/v1/clients.json', client).success(function(response) {
+        $scope.clients.push(client);
+        $scope.client = {};
+      });
+    };
+
+  $scope.test = function() {
+    console.log('something here')
+  }
+
+  $scope.toggleVisit = function(client) {
+    console.log("something here")
+    $http.patch('api/v1/clients.json', client).success(function(response){
+      client.visit_today = !client.visit_today;
     });
   };
-
-  $scope.toggleVisit = function(person) {
-    client.visit_today = !client.visit_today;
-  };
-
   });
 }());

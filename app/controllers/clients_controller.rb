@@ -85,7 +85,7 @@ class ClientsController < ApplicationController
   end
 
   def visits
-    @clients = Client.where(user_id: current_user.id, visit_today: true  )
+    @clients = Client.where(user_id: current_user.id, visit_today: true)
   end
 
   def visit_update

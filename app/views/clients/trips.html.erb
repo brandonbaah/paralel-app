@@ -1,10 +1,20 @@
 <div ng-app="app">
-  <div ng-controller="clientsCtrl" ng-init="trips()">
+  <div class="parentDiv" ng-controller="clientsCtrl" ng-init="trips()">
     <style>
           #right-panel {
             font-family: 'Roboto','sans-serif';
             line-height: 30px;
             padding-left: 10px;
+            position: absolute;
+            right: 10px;
+            background: white;
+            border: 1px solid black;
+            border-radius: 10px;
+          }
+
+          .parentDiv {
+            height:100%;
+            width:100%;
           }
 
           #right-panel select, #right-panel input {
@@ -24,12 +34,11 @@
             padding: 0;
           }
           #map {
-            height: 800px;
+            height: 1000px;
             float: left;
-            width: 700px;
-            height: 500px;
+            width: 1000px;
           }
-          #right-panel {
+          /*#right-panel {
             margin: 20px;
             border-width: 2px;
             width: 20%;
@@ -37,12 +46,13 @@
             float: left;
             text-align: left;
             padding-top: 0;
-          }
+          }*/
           #directions-panel {
             margin-top: 10px;
             background-color: #FFEE77;
             padding: 10px;
           }
+
         </style>
 
         <div id="map"></div>
@@ -50,10 +60,7 @@
         <div>
         <b>Start:</b>
         <select id="start">
-          <option value="Halifax, NS">Halifax, NS</option>
-          <option value="Boston, MA">Boston, MA</option>
-          <option value="New York, NY">New York, NY</option>
-          <option value="Miami, FL">Miami, FL</option>
+          <option value="{{client.address}}">{{client.name}}</option>
         </select>
         <br>
         <b>Waypoints:</b> <br>
