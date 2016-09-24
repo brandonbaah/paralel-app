@@ -1,5 +1,5 @@
 <div ng-app="app">
-  <div ng-controller="usersCtrl">
+  <div ng-controller="usersCtrl" ng-init="showUser(<%= current_user.id %>)">
 
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= @percentage.round %>%;">
@@ -7,32 +7,32 @@
       </div>
     </div>
 
+  <h1>Welcome {{user.first_name}}</h1>
 
-<h2>Welcome <%= @user.first_name %></h2><br/>
 
 
 <h3>News Feed</h3>
-<% @activities.each do |activity| %>
-  <% if activity.recordable_type == "Post" %>
-    <h5><%= activity.user.first_name %>: <%= activity.display_text %> </h5>
-  <% elsif activity.recordable_type == "CheckList" %>
-    <h5><%= activity.user.first_name %> <%= activity.event %> a goal for <% if activity.recordable.client.user.first_name == current_user.first_name%><a href="/clients/<%= activity.recordable.client.id%>"><%= activity.recordable.client.name %></a><% else %> <%= activity.recordable.client.name %> <% end%> at <%= activity.updated_at %></h5>
-    <h5>Goal: <%= activity.display_text %></h5>
-  <% else %>
-    <h5><%= activity.user.first_name %> <%= activity.event %> <%= activity.display_text %> <%= activity.recordable_type %> at <%= activity.updated_at %></h5>
-  <% end %>
-  <% activity.comments.each do |comment| %>
-    <h6><%= comment.user.first_name %>: <%= comment.text %><h6>
-  <% end %>
-  <div>
-    <h6>
-      <%= form_tag("/users/#{@user.id}/comments", method: "post") do %>
-        <%= text_field_tag(:text, nil, :placeholder => "Leave Comment") %><%= submit_tag("Comment") %>
-        <%= hidden_field_tag(:activity_id, activity.id) %>
-      <% end %>
-    </h6>
+<div ng-repeat="activity in user.activities">
+  <div ng-if="activity.recordable_type == 'Post'">
+    <h5>{{user.first_name}}: {{activity.display_text}} </h5>
   </div>
-<% end %>
+  <div ng-if="activity.recordable_type == 'CheckList'">
+    <h5>{{user.first_name}} {{activity.event}} a goal for
+    <a ng-href="/clients/{{activity.client.id}}">{{activity.client_name}}</a> at {{activity.updated_at}}</h5>
+    <h5>Goal: {{activity.display_text}}</h5>
+  </div>
+  <div ng-if="testFunction(activity)">
+    <h5>{{user.first_name}} {{activity.event}} {{activity.display_text}} {{activity.recordable_type}} at {{activity.updated_at}}</h5>
+  </div>
+  <h6>
+    <input type="textarea" class="form-control "placeholder="Leave Comment" ng-model="commento.text" rows="3">
+    <input type="hidden" class="form-control" ng-model="activityId">
+    <button type="button" class="btn btn-primary" ng-click="addComment(activity, commento)">Comment</button>
+  </h6>
+  <div ng-repeat="comment in activity.comments">
+    <h6>{{comment.first_name}}: {{comment.text}}<h6>
+  </div>
+</div>
 
 
 

@@ -3,6 +3,7 @@ class Activity < ApplicationRecord
   belongs_to :user
   has_many :comments
   belongs_to :check_list
+  belongs_to :client
   def display_text
     if recordable_type == "User"
       return recordable.email

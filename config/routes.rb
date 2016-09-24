@@ -40,6 +40,9 @@ Rails.application.routes.draw do
 
        get '/activities' => 'activities#index'
 
+       get '/comment_form' => 'comments#new'
+       post '/comments' => 'comments#create'
+
        get '/visits' => 'clients#visits'
        get '/clients' => 'clients#index'
        get '/clients/new' => 'clients#new'
@@ -48,6 +51,9 @@ Rails.application.routes.draw do
        get '/clients/:id/edit' => 'clients#edit'
        patch '/clients' => 'clients#visit_update'
        delete 'clients/:id' => 'clients#destroy'
+
+       get '/comments' => 'comments#index'
+       get '/comments/:id' => 'comments#show'
    end
  end
 end
