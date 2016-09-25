@@ -1,7 +1,10 @@
 class Api::V1::UsersController < ApplicationController
   def show
+    @actions = Activity.all.order(updated_at: :desc)
     @activities = Activity.all
+
     if current_user.admin
+      @users = User.all
       # @admin = current_user
       @user = User.find_by(id: params[:id] || current_user.id)
     else

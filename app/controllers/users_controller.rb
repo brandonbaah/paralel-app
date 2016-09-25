@@ -9,9 +9,9 @@ class UsersController < ApplicationController
     @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false).length
     @tasks = CheckList.where(user_id: current_user.id, complete: false)
     @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
-    @activities = Activity.order(updated_at: :desc).first(6)
+    @actions = Activity.all.order(updated_at: :desc)
     if current_user.admin
-      # @admin = current_user
+      @users = Users.all
       @user = User.find_by(id: params[:id] || current_user.id)
     else
       @user = current_user

@@ -10,24 +10,23 @@
   <h3>News Feed</h3><br/>
       <div ng-repeat="activity in user.activities">
         <div ng-if="activity.recordable_type == 'Post'">
-          <h5>{{user.first_name}}: {{activity.display_text}} </h5>
+          <h5>{{activity.first_name}}: {{activity.display_text}} </h5>
         </div>
         <div ng-if="activity.recordable_type == 'CheckList'">
-          <h5>{{user.first_name}} {{activity.event}} a goal for
+          <h5>{{activity.first_name}} {{activity.event}} a goal for
           <a ng-href="/clients/{{activity.client.id}}">{{activity.client_name}}</a> at {{activity.updated_at}}</h5>
           <h5>Goal: {{activity.display_text}}</h5>
         </div>
         <div ng-if="testFunction(activity)">
-          <h5>{{user.first_name}} {{activity.event}} {{activity.display_text}} {{activity.recordable_type}} at {{activity.updated_at}}</h5>
+          <h5>{{activity.first_name}} {{activity.event}} {{activity.display_text}} {{activity.recordable_type}} at {{activity.updated_at}}</h5>
         </div>
           <h6>
             <input type="textarea" class="form-control "placeholder="Leave Comment" ng-model="commento.text" rows="3">
             <input type="hidden" class="form-control" ng-model="activityId">
             <button type="button" ng-click="addComment(activity, commento)">Comment</button>
           </h6>
-        <div class="container">
-          <h6>View Comments</h6>
-        <div id="comments" class="collapse">
+          <h5 type="button" class="btn btn-info" style="cursor: pointer;"  data-toggle="collapse" data-target="#goals">View Comments</h5>
+          <div id="goals" class="collapse">
           <div ng-repeat="comment in activity.comments">
             <h6>{{comment.first_name}}: {{comment.text}}<h6>
           </div>

@@ -34,7 +34,7 @@ class ClientsController < ApplicationController
       visit_today: false
       )
 
-      Activity.create(
+      @activity = Activity.create(
         user_id: current_user.id,
         event: "created",
         recordable_type: "Client",
@@ -42,7 +42,33 @@ class ClientsController < ApplicationController
       )
 
       ActionCable.server.broadcast "live_feed",
-      
+        id: activity.id,
+        event: action.event,
+        recordable_id: action.recordable_id,
+        recordable_type: action.recordable_type,
+        user_id: action.user_id,
+        updated_at: action.updated_at,
+        created_at: action.created_at,
+        display_text: action.display_text,
+        if action.recordable_type == "Client"
+          client_name: action.recordable.name,
+          client_id: action.recordable.id,
+        elsif action.recordable_type == "CaseNote" || action.recordable_type == "CheckList",
+          client_name: action.recordable.client.name,
+          client_id: action.recordable.client_id
+        end
+      end
+
+        user_id: action.user.id,
+        first_name: action.user.first_name,
+        last_name: action.user.last_name,
+        email: action.user.email,
+        role_id: action.user.role_id,
+        admin: action.user.admin,
+        director_id: action.user.director_id,
+        supervisor_id: action.user.supervisor_id
+      end
+
 
     flash[:success] = "Client: #{@client.name} was successfully created."
     redirect_to "/clients"
