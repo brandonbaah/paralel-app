@@ -4,6 +4,7 @@ class Activity < ApplicationRecord
   has_many :comments
   belongs_to :check_list
   belongs_to :client
+  belongs_to :post
   def display_text
     if recordable_type == "User"
       return recordable.email
@@ -17,4 +18,19 @@ class Activity < ApplicationRecord
       return recordable.goal
     end
   end
+
+  def channel_name
+    if action.recordable_type == "Client"
+      client_name = action.recordable.name
+    else
+      client_name = action.recordable.client.name
+    end
+  end
+  def channel_id
+    if action.recordable_type == "Client"
+      client_id = action.recordable.id
+    else
+      client_id = action.recordable.client_id
+  end
+end
 end

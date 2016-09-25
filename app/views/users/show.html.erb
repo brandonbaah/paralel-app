@@ -3,6 +3,7 @@
 
   <h6>
     <input type="textarea" class="form-control "placeholder="What's on your mind {{user.first_name}}?" ng-model="post.text" rows="3">
+    <input type="hidden" class="form-control ng-model="post.user.id" rows="3">
     <button type="button" ng-click="addPost(post)">Post</button>
   </h6>
 

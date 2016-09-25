@@ -50,14 +50,8 @@ class ClientsController < ApplicationController
         updated_at: action.updated_at,
         created_at: action.created_at,
         display_text: action.display_text,
-        if action.recordable_type == "Client"
-          client_name: action.recordable.name,
-          client_id: action.recordable.id,
-        elsif action.recordable_type == "CaseNote" || action.recordable_type == "CheckList",
-          client_name: action.recordable.client.name,
-          client_id: action.recordable.client_id
-        end
-      end
+        client_name: action.channel_name,
+        client_id: action.channel_id,
 
         user_id: action.user.id,
         first_name: action.user.first_name,
@@ -67,8 +61,6 @@ class ClientsController < ApplicationController
         admin: action.user.admin,
         director_id: action.user.director_id,
         supervisor_id: action.user.supervisor_id
-      end
-
 
     flash[:success] = "Client: #{@client.name} was successfully created."
     redirect_to "/clients"

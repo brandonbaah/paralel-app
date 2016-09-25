@@ -36,12 +36,17 @@ Rails.application.routes.draw do
 
    namespace :api do
      namespace :v1 do
+
        get '/users/:id' => 'users#show'
 
        get '/activities' => 'activities#index'
 
        get '/comment_form' => 'comments#new'
        post '/comments' => 'comments#create'
+
+       get '/posts' => 'posts#index'
+       post '/posts' => 'posts#create'
+
 
        get '/visits' => 'clients#visits'
        get '/clients' => 'clients#index'

@@ -19,7 +19,6 @@
         response.first_name = $scope.user.first_name
         activity.comments.push(response);
       });
-      debugger
       response.text = null;
     };
 
@@ -32,6 +31,18 @@
         $scope.user = response.data;
       });
     };
+
+    $scope.addPost = function(post){
+      var PostParams = {
+        text: post.text,
+        user_id: $scope.user.id
+      }
+      $http.post('/api/v1/posts.json', PostParams).success(function(post){
+        $scope.user.activities.push(post);
+      });
+      post.text = null;
+    };
+
 
   });
 }());
