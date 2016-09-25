@@ -1,67 +1,38 @@
 <div ng-app="app">
   <div ng-controller="usersCtrl" ng-init="showUser(<%= current_user.id %>)">
 
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= @percentage.round %>%;">
-        <%= @percentage.round %>%
+  <h6>
+    <input type="textarea" class="form-control "placeholder="What's on your mind {{user.first_name}}?" ng-model="post.text" rows="3">
+    <button type="button" ng-click="addPost(post)">Post</button>
+  </h6>
+
+
+  <h3>News Feed</h3><br/>
+      <div ng-repeat="activity in user.activities">
+        <div ng-if="activity.recordable_type == 'Post'">
+          <h5>{{user.first_name}}: {{activity.display_text}} </h5>
+        </div>
+        <div ng-if="activity.recordable_type == 'CheckList'">
+          <h5>{{user.first_name}} {{activity.event}} a goal for
+          <a ng-href="/clients/{{activity.client.id}}">{{activity.client_name}}</a> at {{activity.updated_at}}</h5>
+          <h5>Goal: {{activity.display_text}}</h5>
+        </div>
+        <div ng-if="testFunction(activity)">
+          <h5>{{user.first_name}} {{activity.event}} {{activity.display_text}} {{activity.recordable_type}} at {{activity.updated_at}}</h5>
+        </div>
+          <h6>
+            <input type="textarea" class="form-control "placeholder="Leave Comment" ng-model="commento.text" rows="3">
+            <input type="hidden" class="form-control" ng-model="activityId">
+            <button type="button" ng-click="addComment(activity, commento)">Comment</button>
+          </h6>
+        <div class="container">
+          <h6>View Comments</h6>
+        <div id="comments" class="collapse">
+          <div ng-repeat="comment in activity.comments">
+            <h6>{{comment.first_name}}: {{comment.text}}<h6>
+          </div>
+        </div>
       </div>
     </div>
-
-  <h1>Welcome {{user.first_name}}</h1>
-
-
-
-<h3>News Feed</h3>
-<div ng-repeat="activity in user.activities">
-  <div ng-if="activity.recordable_type == 'Post'">
-    <h5>{{user.first_name}}: {{activity.display_text}} </h5>
-  </div>
-  <div ng-if="activity.recordable_type == 'CheckList'">
-    <h5>{{user.first_name}} {{activity.event}} a goal for
-    <a ng-href="/clients/{{activity.client.id}}">{{activity.client_name}}</a> at {{activity.updated_at}}</h5>
-    <h5>Goal: {{activity.display_text}}</h5>
-  </div>
-  <div ng-if="testFunction(activity)">
-    <h5>{{user.first_name}} {{activity.event}} {{activity.display_text}} {{activity.recordable_type}} at {{activity.updated_at}}</h5>
-  </div>
-  <h6>
-    <input type="textarea" class="form-control "placeholder="Leave Comment" ng-model="commento.text" rows="3">
-    <input type="hidden" class="form-control" ng-model="activityId">
-    <button type="button" class="btn btn-primary" ng-click="addComment(activity, commento)">Comment</button>
-  </h6>
-  <div ng-repeat="comment in activity.comments">
-    <h6>{{comment.first_name}}: {{comment.text}}<h6>
-  </div>
-</div>
-
-
-
-<h3> My Team </h3>
-  <% if @user.role.position == "Director" %>
-    <% @user.supervisors.each do |supervisor| %>
-      <a href="/users/<%= @user.id %>">
-          <li><%= supervisor.first_name %> <%= supervisor.last_name %> (<%= supervisor.role.position %>)</li>
-      </a>
-    <% end %>
-  <% end %>
-
-  <% unless @user.role.position == "Director" %>
-    <li><h4><%= @user.director.first_name %> (<%= @user.director.role.position %>)</h4></li>
-    <% unless @user.role.position == "Case Supervisor" %>
-      <li><h4><%= @user.supervisor.first_name %></h4> <h5><%= @user.supervisor.role.position %></h5></li>
-    <% end %>
-    <% if @user.role.position == "Case Manager" %>
-      <% @user.supervisor.managers.each do |manager| %>
-        <li><h4><%= manager.first_name %> <%= manager.last_name %></h4> <h5> <%= manager.role.position %></h5></li>
-        <% end %>
-    <% end %>
-  <% end %>
-  <br/>
-
-<h4>My Checklist</h4>
-  <% @user.check_lists.each do |check_list| %>
-    <h5><li><%= check_list.goal %></li></h5>
-  <% end %>
-
   </div>
 </div>

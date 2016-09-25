@@ -3,11 +3,17 @@ class ClientsController < ApplicationController
   def index
     @clients = Client.order(:id)
     @clients = Client.where(user_id: current_user.id)
+    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false).length
+    @tasks = CheckList.where(user_id: current_user.id, complete: false)
+    @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
     render "index.html.erb"
   end
 
   def show
     @client = Client.find_by(id: params[:id])
+    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false).length
+    @tasks = CheckList.where(user_id: current_user.id, complete: false)
+    @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
     render "show.html.erb"
   end
 
@@ -35,12 +41,18 @@ class ClientsController < ApplicationController
         recordable_id: @client.id
       )
 
+      ActionCable.server.broadcast "live_feed",
+      
+
     flash[:success] = "Client: #{@client.name} was successfully created."
     redirect_to "/clients"
   end
 
   def edit
     @client = Client.find_by(id: params[:id])
+    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false).length
+    @tasks = CheckList.where(user_id: current_user.id, complete: false)
+    @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
     render "edit.html.erb"
   end
 
@@ -82,10 +94,16 @@ class ClientsController < ApplicationController
 
   def client_maps
     @clients = Client.where(user_id: current_user.id)
+    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false).length
+    @tasks = CheckList.where(user_id: current_user.id, complete: false)
+    @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
   end
 
   def visits
     @clients = Client.where(user_id: current_user.id, visit_today: true)
+    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false).length
+    @tasks = CheckList.where(user_id: current_user.id, complete: false)
+    @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
   end
 
   def visit_update

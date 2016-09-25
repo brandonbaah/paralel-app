@@ -16,4 +16,16 @@ class ApplicationController < ActionController::Base
       redirect_to '/'
     end
   end
+
+  layout :layout_by_resource
+
+  protected
+
+  def layout_by_resource
+    if devise_controller?
+      "welcome"
+    else
+      "application"
+    end
+  end
 end

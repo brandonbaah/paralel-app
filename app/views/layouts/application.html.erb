@@ -203,24 +203,11 @@
         </div>
       </div>
 
-      <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
         <li class="header">Menu</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="/"><i class="fa fa-link"></i> <span>My Profile</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Calendar</span></a></li>
+        <li class="active"><a href="/"><i class="fa fa-link"></i> <span>News Feed</span></a></li>
         <li><%= link_to "My Clients", "/clients" %></i> <span></span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Maps</span>
@@ -274,19 +261,8 @@
     <div class="tab-content">
       <!-- Home tab content -->
       <div class="tab-pane active" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <h3 class="control-sidebar-heading">Activity</h3>
         <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript::;">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
         </ul>
         <!-- /.control-sidebar-menu -->
 
@@ -295,16 +271,52 @@
           <li>
             <a href="javascript::;">
               <h4 class="control-sidebar-subheading">
-                Custom Template Design
+                Completed Tasks
                 <span class="pull-right-container">
-                  <span class="label label-danger pull-right">70%</span>
+                  <span class="label label-danger pull-right"><%= @percentage.round %>%</span>
                 </span>
               </h4>
 
               <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                <div class="progress-bar progress-bar-danger" style="width: <%= @percentage.round %>%"></div>
               </div>
+              <br/>
+
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add New Goal</button>
+
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="exampleModalLabel">New Goal for <%= @user.first_name %></h4>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="form-group">
+                          <label for="message-text" class="control-label">New Goal:</label>
+                          <textarea class="form-control" id="Add Goal here..."></textarea>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br/>
+              <span class="control-sidebar-menu">
+                <h5>You have <%= @uncompleted_tasks %> uncompleted tasks.</h5><br/>
+                <% @tasks.each do |task| %>
+                <h6><li><%= task.goal %></li></h6>
+                <% end %>
+              </span>
             </a>
+            <br/>
+          <br/>
+            <br/>
           </li>
         </ul>
         <!-- /.control-sidebar-menu -->
@@ -317,16 +329,32 @@
       <!-- Settings tab content -->
       <div class="tab-pane" id="control-sidebar-settings-tab">
         <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
+          <h3 class="control-sidebar-heading">My Team</h3>
 
           <div class="form-group">
             <label class="control-sidebar-subheading">
-              Report panel usage
+              <% unless current_user.role.position == "Director" %>
+                <ul><h4><%= current_user.director.role.position %></h4></ul>
+                <ul><h5><%= current_user.director.first_name %></h5></ul>
+                <% unless current_user.role.position == "Case Supervisor" %>
+                  <ul><h4><%= current_user.supervisor.role.position %></h4></ul>
+                  <ul><h5><%=  current_user.supervisor.first_name %></h5></ul>
+                <% end %>
+                <% if current_user.role.position == "Case Manager" %>
+                  <% current_user.supervisor.managers.each do |manager| %>
+                    <ul><h5> <%= manager.role.position %></h5></ul>
+                    <ul><h6><%= manager.first_name %> <%= manager.last_name %></h6></ul>
+                    <% end %>
+                <% end %>
+              <% end %>
+              <br/>
               <input type="checkbox" class="pull-right" checked>
             </label>
 
             <p>
-              Some information about this general settings option
+              Please contact office if you have any questions.
+              <br/>
+              Office Phone: (212) 229-0112
             </p>
           </div>
           <!-- /.form-group -->
