@@ -17,6 +17,8 @@ class Api::V1::CommentsController < ApplicationController
     activity_id: params[:activity_id],
     user_id: current_user.id
     )
+    ActionCable.server.broadcast "live_feed",
+      please: "work!"
     render 'show.json.jbuilder'
   end
 

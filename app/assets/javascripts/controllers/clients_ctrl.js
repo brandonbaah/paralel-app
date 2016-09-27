@@ -40,6 +40,17 @@
             position: {lat: client.latitude, lng: client.longitude},
             title: client.name
           });
+
+          var client = "<h4>" + client.name + "</h4>" +
+     "<h5>" + client.address + "</h5>" + "<h5>" + client.phone + "</h5>";
+
+     var infoWindow = new google.maps.InfoWindow({
+     content: client
+     });
+
+     marker.addListener('click', function(){
+     infoWindow.open(map, marker);
+     });
           marker.setMap(map);
         });
       });
@@ -58,6 +69,17 @@
             position: {lat: client.latitude, lng: client.longitude},
             title: client.name
           });
+
+          var client = "<h4>" + client.name + "</h4>" +
+     "<h5>" + client.address + "</h5>" + "<h5>" + client.phone + "</h5>";
+
+     var infoWindow = new google.maps.InfoWindow({
+     content: client
+     });
+
+     marker.addListener('click', function(){
+     infoWindow.open(map, marker);
+     });
           marker.setMap(map);
         });
       });

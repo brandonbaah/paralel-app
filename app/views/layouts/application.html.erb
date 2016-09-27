@@ -2,10 +2,11 @@
 <html>
 <head>
   <title>ParalelApp</title>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['API_KEY']}", async: true, defer: true  %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -289,7 +290,8 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="exampleModalLabel">New Goal for <%= @user.first_name %></h4>
+                      <% if current_user %>
+                      <h4 class="modal-title" id="exampleModalLabel">New Goal for <%= current_user.first_name %></h4>
                     </div>
                     <div class="modal-body">
                       <form>
@@ -307,6 +309,7 @@
                 </div>
               </div>
               <br/>
+              <% end %>
               <span class="control-sidebar-menu">
                 <h5>You have <%= @uncompleted_tasks %> uncompleted tasks.</h5><br/>
                 <% @tasks.each do |task| %>
@@ -339,6 +342,10 @@
                 <% unless current_user.role.position == "Case Supervisor" %>
                   <ul><h4><%= current_user.supervisor.role.position %></h4></ul>
                   <ul><h5><%=  current_user.supervisor.first_name %></h5></ul>
+                  <% current_user.managers.each do |manager| %>
+                    <ul><h5> <%= manager.role.position %></h5></ul>
+                    <ul><h6><%= manager.first_name %> <%= manager.last_name %></h6></ul>
+                    <% end %>
                 <% end %>
                 <% if current_user.role.position == "Case Manager" %>
                   <% current_user.supervisor.managers.each do |manager| %>

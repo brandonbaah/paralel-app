@@ -1,7 +1,7 @@
 <div ng-app="app">
   <div ng-controller="clientsCtrl" ng-init="clientList()">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" align="center">
       Create New Client
     </button>
 
@@ -38,14 +38,18 @@
         </div>
       </div>
     </div>
-  <h1>Clients</h1>
+  <h1 align="center">Clients</h1>
 
   <div ng-repeat="client in clients" class="col-md-6 framework-well">
     <div class="col-md-12 well">
       <a ng-href="/clients/{{client.id}}" color="black">
-         <h3>{{client.name}}</h3>
+         <h3 align="center">{{client.name}}</h3>
       </a>
-        <button type="button" class="btn btn-primary" ng-click="toggleVisit(client)" ng-href="/visits/{{client.id}}", method: 'patch'>Visit today</button>
+      <div align="center">
+      <button type="button" class="btn btn-primary" ng-click="toggleVisit(client)" ng-href="/visits/{{client.id}}", method: 'patch' data-toggle="button" aria-pressed="false" autocomplete="off">
+        Visit Today
+      </button>
+    </div>
     </div>
   </div>
 

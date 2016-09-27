@@ -3,11 +3,17 @@ class CaseNotesController < ApplicationController
   def index
     @client = Client.find_by(id: params[:id])
     @case_notes = @client.case_notes
+    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false).length
+    @tasks = CheckList.where(user_id: current_user.id, complete: false)
+    @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
     render "index.html.erb"
   end
 
   def show
     @case_note = CaseNote.find_by(id: params[:id])
+    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false).length
+    @tasks = CheckList.where(user_id: current_user.id, complete: false)
+    @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
     render "show.html.erb"
   end
 
@@ -36,6 +42,9 @@ class CaseNotesController < ApplicationController
   end
 
   def edit
+    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false).length
+    @tasks = CheckList.where(user_id: current_user.id, complete: false)
+    @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
     @casenote = CaseNote.find_by(id: params[:id])
     render "edit.html.erb"
   end

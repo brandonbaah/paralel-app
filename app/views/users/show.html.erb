@@ -2,14 +2,14 @@
   <div ng-controller="usersCtrl" ng-init="showUser(<%= current_user.id %>)">
 
   <h6>
-    <input type="textarea" class="form-control "placeholder="What's on your mind {{user.first_name}}?" ng-model="post.text" rows="3">
-    <input type="hidden" class="form-control ng-model="post.user.id" rows="3">
+    <input type="textarea" class="form-control" placeholder="What's on your mind {{user.first_name}}?" ng-model="post.text" rows="3">
+    <input type="hidden" class="form-control" ng-model="post.user.id" rows="3">
     <button type="button" ng-click="addPost(post)">Post</button>
   </h6>
 
 
   <h3>News Feed</h3><br/>
-      <div ng-repeat="activity in user.activities">
+      <div ng-repeat="activity in user.activities track by $index">
         <div ng-if="activity.recordable_type == 'Post'">
           <h5>{{activity.first_name}}: {{activity.display_text}} </h5>
         </div>
@@ -21,15 +21,18 @@
         <div ng-if="testFunction(activity)">
           <h5>{{activity.first_name}} {{activity.event}} {{activity.display_text}} {{activity.recordable_type}} at {{activity.updated_at}}</h5>
         </div>
+        <h5 type="text" style="cursor: pointer;"  data-toggle="collapse" ng-attr-data-target="{{ '#dropdown-' + $index }}">Leave Comment</h5>
+        <div ng-attr-id="{{ 'dropdown-' + $index }}" class="collapse">
           <h6>
             <input type="textarea" class="form-control "placeholder="Leave Comment" ng-model="commento.text" rows="3">
             <input type="hidden" class="form-control" ng-model="activityId">
             <button type="button" ng-click="addComment(activity, commento)">Comment</button>
           </h6>
-          <h5 type="button" class="btn btn-info" style="cursor: pointer;"  data-toggle="collapse" data-target="#goals">View Comments</h5>
-          <div id="goals" class="collapse">
+          <h5 type="button" class="btn btn-info" style="cursor: pointer;"  data-toggle="collapse" ng-attr-data-target="{{ '#comments-' + $index }}">View Comments</h5>
+          <div ng-attr-id="{{ 'comments-' + $index }}" class="collapse">
           <div ng-repeat="comment in activity.comments">
             <h6>{{comment.first_name}}: {{comment.text}}<h6>
+            </div>
           </div>
         </div>
       </div>

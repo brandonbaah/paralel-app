@@ -20,17 +20,17 @@ class Activity < ApplicationRecord
   end
 
   def channel_name
-    if action.recordable_type == "Client"
-      client_name = action.recordable.name
+    if recordable_type == "Client"
+      client_name = recordable.name
     else
-      client_name = action.recordable.client.name
+      client_name = recordable.client.name
     end
   end
   def channel_id
-    if action.recordable_type == "Client"
-      client_id = action.recordable.id
+    if recordable_type == "Client"
+      client_id = recordable.id
     else
-      client_id = action.recordable.client_id
+      client_id = recordable.client_id
   end
 end
 end

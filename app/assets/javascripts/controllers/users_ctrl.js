@@ -4,8 +4,16 @@
   angular.module("app").controller('usersCtrl', function($scope, $http){
     $scope.showUser = function(id) {
       $http.get('/api/v1/users/' + id + '.json').then(function(response) {
-        console.log(response.data);
         $scope.user = response.data;
+        App.activtity = App.cable.subscriptions.create({
+          channel: "LiveFeedChannel"
+        },
+        {
+          recieved: function(data) {
+            console.log(data)
+          }
+        }
+      )
       });
     };
 
@@ -17,9 +25,9 @@
       }
       $http.post('/api/v1/comments.json', commentParams).success(function(response){
         response.first_name = $scope.user.first_name
-        activity.comments.push(response);
+        activity.comments.push(commentParams);
+        response.text = null;
       });
-      response.text = null;
     };
 
     $scope.testFunction = function(activity){
@@ -33,11 +41,12 @@
     };
 
     $scope.addPost = function(post){
-      var PostParams = {
+      var postParams = {
         text: post.text,
         user_id: $scope.user.id
       }
-      $http.post('/api/v1/posts.json', PostParams).success(function(post){
+      $http.post('/api/v1/posts.json', postParams).success(function(response){
+        console.log(response)
         $scope.user.activities.push(post);
       });
       post.text = null;

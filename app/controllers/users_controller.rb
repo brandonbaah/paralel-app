@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
     @actions = Activity.all.order(updated_at: :desc)
     if current_user.admin
-      @users = Users.all
+      @users = User.all
       @user = User.find_by(id: params[:id] || current_user.id)
     else
       @user = current_user
