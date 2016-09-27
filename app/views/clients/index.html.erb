@@ -44,6 +44,7 @@
     <div class="col-md-12 well">
       <a ng-href="/clients/{{client.id}}" color="black">
          <h3 align="center">{{client.name}}</h3>
+         <img ng-src="{{client.image}}" height: '160', width: '210', alt: "rss feed", class: "img-circle">
       </a>
       <div align="center">
       <button type="button" class="btn btn-primary" ng-click="toggleVisit(client)" ng-href="/visits/{{client.id}}", method: 'patch' data-toggle="button" aria-pressed="false" autocomplete="off">

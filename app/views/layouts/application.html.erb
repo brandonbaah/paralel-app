@@ -8,7 +8,32 @@
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['API_KEY']}", async: true, defer: true  %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini"  >
+
+
+  <div class="modal fade" id="usergoalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document"  ng-controller="usersCtrl" >>
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <% if current_user %>
+          <h4 class="modal-title" id="exampleModalLabel">New Goal for <%= current_user.first_name %></h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="message-text" class="control-label">New Goal:</label>
+              <textarea class="form-control" id="Add Goal here..."></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" ng-click="addGoal(goal)">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -46,7 +71,7 @@
                   <li><!-- start message -->
                       <div class="pull-left">
                         <!-- User Image -->
-                        <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
+                        <%= image_tag("#{current_user.image}",  class: "img-circle") %>
 
                       <!-- Message title and timestamp -->
                       <% @clients = Client.where(user_id: current_user.id, visit_today: true).each do |client|%>
@@ -119,7 +144,7 @@
                 </ul>
               </li>
               <li class="footer">
-                <a href="/tasks">View all tasks</a>
+                <a href="/tasks">View all tasks </a>
               </li>
             </ul>
           </li>
@@ -139,7 +164,7 @@
               <!-- Hide Dropdown Menu if not Current User, only Footer -->
               <% if current_user %>
               <li class="user-header">
-                <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
+                <%= image_tag("#{current_user.image}",  class: "img-circle") %>
                 <p>
                   <%= current_user.first_name %> <%= current_user.last_name %> - <%= current_user.role.position %>
                   <small>Staff since <%= current_user.created_at %></small>
@@ -193,7 +218,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <%= image_tag("#{current_user.image}",  class: "img-circle") %>
         </div>
         <div class="pull-left info">
           <% if current_user %>
@@ -283,31 +308,9 @@
               </div>
               <br/>
 
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Add New Goal</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#usergoalModal" data-whatever="@getbootstrap">Add New Goal</button>
 
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <% if current_user %>
-                      <h4 class="modal-title" id="exampleModalLabel">New Goal for <%= current_user.first_name %></h4>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="form-group">
-                          <label for="message-text" class="control-label">New Goal:</label>
-                          <textarea class="form-control" id="Add Goal here..."></textarea>
-                        </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Submit</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
               <br/>
               <% end %>
               <span class="control-sidebar-menu">
@@ -359,7 +362,7 @@
             </label>
 
             <p>
-              Please contact office if you have any questions.
+              Please contact Paralel for HR changes.
               <br/>
               Office Phone: (212) 229-0112
             </p>
@@ -386,5 +389,7 @@
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
+   </div>
+     </div>
 </body>
 </html>

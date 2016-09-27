@@ -87,9 +87,9 @@ class Api::V1::ClientsController < ApplicationController
       recordable_type: "Client",
       recordable_id: @client.id
     )
-    
+
     flash[:success] = "Client: #{@client.name} was successfully updated."
-    render json: {success: "Successfully updated"}
+    render 'show.json.jbuilder'
   end
 
   def destroy

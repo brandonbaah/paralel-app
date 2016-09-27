@@ -4,6 +4,8 @@
     <!-- Button trigger modal -->
       <h3 align="center"><%= @client.name %><%= "        " %></h3>
       <div align="center">
+        <div><%= image_tag("#{@client.image}", height: '160', width: '210', alt: "rss feed", class: "img-circle") %></div>
+          <br/>
       <button align="center" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
       Edit Client
     </button>
@@ -15,7 +17,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Create Your New Client</h4>
+            <h4 class="modal-title" id="myModalLabel">Update Your New Client</h4>
           </div>
           <div class="modal-body">
             <div>
@@ -63,6 +65,7 @@
 
 
 
+
     <h4>Client Goals</h4>
     <h5 type="button" class="btn btn-info" style="cursor: pointer;"  data-toggle="collapse" data-target="#goals">View Goals</h5>
     <div id="goals" class="collapse">
@@ -90,12 +93,16 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-primary" ng-click="addCheckList(goal)">Submit</button>
         </div>
       </div>
     </div>
   </div>
 <br/>
+  Recent Activity
+  <% @client.activities.each do |activity| %>
+    <%= activity.event %> <%= activity.recordable_type %> at <%= activity.created_at %>
+  <% end %>
 
     <div>
       <%= link_to "Visit Client Today", "/visits/#{@client.id}", method: 'patch' %>

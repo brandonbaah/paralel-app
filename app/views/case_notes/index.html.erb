@@ -3,15 +3,19 @@
 
 <h5> Date of Last Visit: <%= @client.case_notes.last.date %></h5>
 
-<div class="row product-index">
-  <% @client.case_notes.each do |case_note| %>
-    <a href="/clients/casenotes/<%= case_note.id %>">
-    <div>
-    <h5>Date: <%= case_note.date %></h5>
+      <% @client.case_notes.each do |case_note| %>
+      <div class="row casenote-index">
+        <div class="col-md-12 well">
+        <a href="/clients/casenotes/<%= case_note.id %>">
+        <div>
+          View Case Note
+        </div>
+        </a>
+        <h5 align="center">Date: <%= case_note.date %></h5>
+        <h5>Case Summary: <%= case_note.note %></h5>
+      </div>
     </div>
-    </a>
-  <% end %>
-</div>
+      <% end %>
 
 <h4> New Casenote </h4>
   <%= form_tag("/clients/#{@client.id}/casenotes", method: "post") do %>

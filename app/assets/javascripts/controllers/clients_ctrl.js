@@ -21,7 +21,7 @@
       });
     };
 
-    $scope.clientList = function() {
+  $scope.clientList = function() {
     $http.get('/api/v1/clients.json').then(function(response) {
       $scope.clients = response.data;
     });
@@ -151,10 +151,30 @@
     console.log('something here')
   }
 
+  $scope.addCheckList = function(checkList){
+    var checkListParams = {
+      goal: checkList.goal,
+      client_id: $scope.client.id,
+      user_id: $scope.user.id,
+      complete: false
+    }
+    $http.post('/api/v1/check_lists.json', checkListParams).success(function(response){
+      console.log(response)
+      $scope.user.activities.push(checkList);
+    });
+    checkList.text = null;
+  };
+
   $scope.toggleVisit = function(client) {
     console.log("something here")
     $http.patch('api/v1/clients.json', client).success(function(response){
       client.visit_today = !client.visit_today;
+    });
+  };
+
+  $scope.editClient = function(client) {
+    $http.patch('/api/v1/clients/update.json', client).success(function(response) {
+      $scope.client = {};
     });
   };
   });

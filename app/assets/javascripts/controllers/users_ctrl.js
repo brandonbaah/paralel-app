@@ -52,6 +52,24 @@
       post.text = null;
     };
 
+    $scope.toggleGoal = function(user) {
+      $http.patch('/api/v1/users/' + currentUser.id + '.json', user).success(function(response){
+        user.complete = !user.complete;
+      });
+    };
+
+    $scope.addGoal = function(checkList){
+      var checkListParams = {
+        goal: checkList.goal,
+        user_id: $scope.user.id,
+        complete: false
+      }
+      $http.post('/api/v1/check_lists.json', checkListParams).success(function(response){
+        console.log(response)
+        $scope.user.activities.push(checkList);
+      });
+      checkList.text = null;
+    };
 
   });
 }());

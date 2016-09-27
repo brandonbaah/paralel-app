@@ -10,6 +10,7 @@
 
   <h3>News Feed</h3><br/>
       <div ng-repeat="activity in user.activities track by $index">
+        <div class="col-md-12 well">
         <div ng-if="activity.recordable_type == 'Post'">
           <h5>{{activity.first_name}}: {{activity.display_text}} </h5>
         </div>
@@ -20,6 +21,9 @@
         </div>
         <div ng-if="testFunction(activity)">
           <h5>{{activity.first_name}} {{activity.event}} {{activity.display_text}} {{activity.recordable_type}} at {{activity.updated_at}}</h5>
+
+            <img ng-src="{{activity.client_image}}">
+
         </div>
         <h5 type="text" style="cursor: pointer;"  data-toggle="collapse" ng-attr-data-target="{{ '#dropdown-' + $index }}">Leave Comment</h5>
         <div ng-attr-id="{{ 'dropdown-' + $index }}" class="collapse">
@@ -36,6 +40,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </div>
