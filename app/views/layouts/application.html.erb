@@ -9,31 +9,6 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </head>
 <body class="hold-transition skin-blue sidebar-mini"  >
-
-
-  <div class="modal fade" id="usergoalModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-    <div class="modal-dialog" role="document"  ng-controller="usersCtrl" >>
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <% if current_user %>
-          <h4 class="modal-title" id="exampleModalLabel">New Goal for <%= current_user.first_name %></h4>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="message-text" class="control-label">New Goal:</label>
-              <textarea class="form-control" id="Add Goal here..."></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" ng-click="addGoal(goal)">Submit</button>
-        </div>
-      </div>
-    </div>
-  </div>
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -174,13 +149,10 @@
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
                   </div>
                 </div>
                 <!-- /.row -->
@@ -307,12 +279,6 @@
                 <div class="progress-bar progress-bar-danger" style="width: <%= @percentage.round %>%"></div>
               </div>
               <br/>
-
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#usergoalModal" data-whatever="@getbootstrap">Add New Goal</button>
-
-
-              <br/>
-              <% end %>
               <span class="control-sidebar-menu">
                 <h5>You have <%= @uncompleted_tasks %> uncompleted tasks.</h5><br/>
                 <% @tasks.each do |task| %>

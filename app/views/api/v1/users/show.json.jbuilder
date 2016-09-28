@@ -20,11 +20,13 @@ json.activities @actions.each do |action|
     json.client_name action.recordable.name
     json.client_id action.recordable.id
     json.client_image asset_path(action.recordable.image || '')
+  if action.recordable_type == "CheckList"
+    json.note action.recordable.note
   elsif action.recordable_type == "CaseNote" || action.recordable_type == "CheckList"
     json.client_name action.recordable.client.name
     json.client_id action.recordable.client_id
     json.client_image asset_path(action.recordable.client.image || '')
-
+  end
   end
 
   json.user_id action.user.id

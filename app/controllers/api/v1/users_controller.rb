@@ -5,7 +5,6 @@ class Api::V1::UsersController < ApplicationController
 
     if current_user.admin
       @users = User.all
-      # @admin = current_user
       @user = User.find_by(id: params[:id] || current_user.id)
     else
       @user = current_user
