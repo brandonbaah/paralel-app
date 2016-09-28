@@ -1,15 +1,17 @@
 class UsersController < ApplicationController
+  layout "welcome", only: [:home]
   before_action :authorize_admin!, except: [:show]
 
   def home
   end
 
   def show
-    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false)
+    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false).length
+    @tasks = CheckList.where(user_id: current_user.id, complete: false)
     @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
-    @activities = Activity.order(updated_at: :desc).first(6)
+    @actions = Activity.all.order(updated_at: :desc)
     if current_user.admin
-      # @admin = current_user
+      @users = User.all
       @user = User.find_by(id: params[:id] || current_user.id)
     else
       @user = current_user

@@ -21,11 +21,11 @@
       });
     };
 
-    $scope.clientList = function() {
+  $scope.clientList = function() {
     $http.get('/api/v1/clients.json').then(function(response) {
       $scope.clients = response.data;
     });
-  }
+  };
 
     $scope.clientIndex = function() {
       var map;
@@ -36,17 +36,22 @@
         });
         $scope.clients = response.data
         $scope.clients.forEach(function(client) {
-          var infowindow = new google.maps.infowindow({
-            content: client.name
-          });
           var marker = new google.maps.Marker({
             position: {lat: client.latitude, lng: client.longitude},
             title: client.name
           });
+
+          var client = "<h4>" + client.name + "</h4>" +
+     "<h5>" + client.address + "</h5>" + "<h5>" + client.phone + "</h5>";
+
+     var infoWindow = new google.maps.InfoWindow({
+     content: client
+     });
+
+     marker.addListener('click', function(){
+     infoWindow.open(map, marker);
+     });
           marker.setMap(map);
-          google.maps.event.addListener('click', function (){
-            InfoWindow.open(map,marker);
-          });
         });
       });
     };
@@ -64,6 +69,17 @@
             position: {lat: client.latitude, lng: client.longitude},
             title: client.name
           });
+
+          var client = "<h4>" + client.name + "</h4>" +
+     "<h5>" + client.address + "</h5>" + "<h5>" + client.phone + "</h5>";
+
+     var infoWindow = new google.maps.InfoWindow({
+     content: client
+     });
+
+     marker.addListener('click', function(){
+     infoWindow.open(map, marker);
+     });
           marker.setMap(map);
         });
       });
@@ -135,10 +151,30 @@
     console.log('something here')
   }
 
+  $scope.addCheckList = function(checkList){
+    var checkListParams = {
+      goal: checkList.goal,
+      client_id: $scope.client.id,
+      user_id: $scope.user.id,
+      complete: false
+    }
+    $http.post('/api/v1/check_lists.json', checkListParams).success(function(response){
+      console.log(response)
+      $scope.user.activities.push(checkList);
+    });
+    checkList.text = null;
+  };
+
   $scope.toggleVisit = function(client) {
     console.log("something here")
     $http.patch('api/v1/clients.json', client).success(function(response){
       client.visit_today = !client.visit_today;
+    });
+  };
+
+  $scope.editClient = function(client) {
+    $http.patch('/api/v1/clients/update.json', client).success(function(response) {
+      $scope.client = {};
     });
   };
   });

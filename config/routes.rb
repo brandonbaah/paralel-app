@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'signup' }
 
+  mount ActionCable.server => '/cable'
+
    root 'users#show'
 
    get '/home' => 'users#home'
@@ -36,9 +38,20 @@ Rails.application.routes.draw do
 
    namespace :api do
      namespace :v1 do
+
        get '/users/:id' => 'users#show'
 
        get '/activities' => 'activities#index'
+
+       get '/comment_form' => 'comments#new'
+       post '/comments' => 'comments#create'
+
+       get '/posts' => 'posts#index'
+       post '/posts' => 'posts#create'
+
+       get '/checklists' => 'check_lists#index'
+       post '/checklists' => 'check_lists#create'
+
 
        get '/visits' => 'clients#visits'
        get '/clients' => 'clients#index'
@@ -47,7 +60,11 @@ Rails.application.routes.draw do
        get '/clients/:id' => 'clients#show'
        get '/clients/:id/edit' => 'clients#edit'
        patch '/clients' => 'clients#visit_update'
+       patch '/clients/update' => 'clients#update'
        delete 'clients/:id' => 'clients#destroy'
+
+       get '/comments' => 'comments#index'
+       get '/comments/:id' => 'comments#show'
    end
  end
 end

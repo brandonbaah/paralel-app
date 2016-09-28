@@ -1,7 +1,7 @@
 class Api::V1::CheckListsController < ApplicationController
 
   def index
-    @checklists = CheckList.find_by(id: params[:id] || session[:id])
+    @checklists = CheckList.all
   end
 
   def create
@@ -18,8 +18,7 @@ class Api::V1::CheckListsController < ApplicationController
       recordable_type: "CheckList",
       recordable_id: @checklist.id
     )
-    flash[:success] = "New Task Created."
-    redirect_to "/clients/" + @client_id
+    render "index.json.jbuilder"
   end
 
   def update
@@ -35,14 +34,13 @@ class Api::V1::CheckListsController < ApplicationController
       recordable_type: "CheckList",
       recordable_id: @client.id
     )
-    flash[:success] = "Checklist Updated."
+    render "index.json.jbuilder"
   end
 
   def destroy
     @client = Checklist.find_by(id: params[:id])
     @client.destroy
     flash[:success] = "#{@client.name}'s goal was successfully deleted."
-    render "/clients/#{@client.id}"
 
     Activity.create(
       user_id: current_user.id,
@@ -50,5 +48,6 @@ class Api::V1::CheckListsController < ApplicationController
       recordable_type: "CheckList",
       recordable_id: @client.id
     )
+    render "index.json.jbuilder"
   end
 end
