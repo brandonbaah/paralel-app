@@ -7,25 +7,42 @@
     <button type="button" ng-click="addPost(post)">Post</button>
   </h6>
 
-
-  <h3 align="center">News Feed</h3><br/>
+  <h3 align="center">News Feed</h3>
   <div class="mainContainer">
       <div ng-repeat="activity in user.activities track by $index">
         <div class="col-md-12 well">
+          <img ng-src="{{activity.image}}">
         <div ng-if="activity.recordable_type == 'Post'">
-          <h5>{{activity.first_name}}: {{activity.display_text}} </h5>
+          <h5> {{activity.first_name}} {{activity.last_name}} </h5>
+          <h5>{{activity.role}}</h5>
+          <br/>
+          <h5>{{activity.display_text}}</h5>
         </div>
+        <br/>
         <div ng-if="activity.recordable_type == 'CheckList'">
-          <h5>{{activity.first_name}} {{activity.event}} a goal for
+          <div>
+          <h5>{{activity.first_name}} {{activity.last_name}}</h5>
+            <h5>{{activity.role}}</h5>
+        </div>
+        <br/>
+           <h5>{{activity.event}} a goal for
           <a ng-href="/clients/{{activity.client.id}}">{{activity.client_name}}</a> at {{activity.updated_at}}</h5>
           <h5>Goal: {{activity.display_text}}</h5>
+          <br/>
         </div>
         <div ng-if="testFunction(activity)">
-          <h5>{{activity.first_name}} {{activity.event}} {{activity.display_text}} {{activity.recordable_type}} at {{activity.updated_at}}</h5>
+          <div>
+          <h5>{{activity.first_name}} {{activity.last_name}}</h5>
+          <h5>{{activity.role}}</h5>
+        </div>
+        <br/>
+          <h5>{{activity.event}} {{activity.display_text}} {{activity.recordable_type}} at {{activity.updated_at}}</h5>
           <div ng-if="activity.recordable_type == 'CaseNote'">
             {{activity.note}}
           </div>
-            <img ng-src="{{activity.client_image}}" height: '160', width: '210', alt: "rss feed">
+          <div align="center">
+            <img ng-src="{{activity.client_image}}">
+          </div>
         </div>
         <h5 type="text" style="cursor: pointer;"  data-toggle="collapse" ng-attr-data-target="{{ '#dropdown-' + $index }}">Leave Comment</h5>
         <div ng-attr-id="{{ 'dropdown-' + $index }}" class="collapse">

@@ -37,6 +37,8 @@ json.activities @actions.each do |action|
   json.admin action.user.admin
   json.director_id action.user.director_id
   json.supervisor_id action.user.supervisor_id
+  json.image asset_path(action.user.image || '')
+  json.role action.user.role.position
 
 
   json.comments action.comments.each do |comment|

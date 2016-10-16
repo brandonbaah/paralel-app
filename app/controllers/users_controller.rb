@@ -1,12 +1,13 @@
+# Controller for Users
 class UsersController < ApplicationController
-  layout "welcome", only: [:home]
+  layout 'welcome', only: [:home]
   before_action :authorize_admin!, except: [:show]
 
   def home
   end
 
   def show
-    @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false).length
+   @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false).length
     @tasks = CheckList.where(user_id: current_user.id, complete: false)
     @percentage = (CheckList.where(user_id: current_user.id, complete: true).length.to_f / current_user.check_lists.length.to_f) * 100
     @actions = Activity.all.order(updated_at: :desc)
@@ -38,5 +39,18 @@ class UsersController < ApplicationController
   def uncompleted_tasks
     @uncompleted_tasks = CheckList.where(user_id: current_user.id, complete: false)
     @percentage = (CheckList.where(user_id: current_user.id, complete: true).length / current_user.check_lists.length) * 100
+  end
+
+  def toggle_goal
+    @check_list.complete = !@client.complete
+    @check_list.save
+    redirect "/"
+
+    Activity.create(
+      user_id: current_user.id,
+      event: "updated",
+      recordable_type: "User",
+      recordable_id: current_user.id
+    )
   end
 end

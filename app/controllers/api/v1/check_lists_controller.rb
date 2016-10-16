@@ -1,4 +1,5 @@
 class Api::V1::CheckListsController < ApplicationController
+skip_before_action :verify_authenticity_token
 
   def index
     @checklists = CheckList.all

@@ -147,22 +147,16 @@
       });
     };
 
-  $scope.test = function() {
+  $scope.addGoal = function() {
     console.log('something here')
   }
 
   $scope.addCheckList = function(checkList){
-    var checkListParams = {
-      goal: checkList.goal,
-      client_id: $scope.client.id,
-      user_id: $scope.user.id,
-      complete: false
-    }
-    $http.post('/api/v1/check_lists.json', checkListParams).success(function(response){
+    $http.post('/api/v1/checklists.json', checkList).success(function(response){
       console.log(response)
       $scope.user.activities.push(checkList);
     });
-    checkList.text = null;
+    $scope.checkList = null;
   };
 
   $scope.toggleVisit = function(client) {
