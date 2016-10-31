@@ -7,13 +7,13 @@ class PostsController < ApplicationController
   def create
     @user = User.find_by(id: params[:id])
       @post = Post.create(
-      text: params[:text],
-      user_id: params[current_user.id]
+        text: params[:text],
+        user_id: params[current_user.id]
     )
 
     Activity.create(
       user_id: current_user.id,
-      event: "created",
+      event: 'created',
       recordable_type: "Post",
       recordable_id: @post.id
     )
