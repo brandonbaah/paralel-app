@@ -8,9 +8,7 @@ Bundler.require(*Rails.groups)
 
 module ParalelApp
   class Application < Rails::Application
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+
     def name
       if action.recordable_type == "Client"
         client_name = action.recordable.name
@@ -26,4 +24,6 @@ module ParalelApp
     end
   end
 end
+
+
 end
