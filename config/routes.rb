@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
    get '/tasks' => 'users#user_tasks'
    get '/users/:id' => 'users#show'
+   get '/show2' => 'users#show2'
 
    get '/clients' => 'clients#index'
    get '/visits' => 'clients#visits'
