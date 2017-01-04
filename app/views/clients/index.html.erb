@@ -40,19 +40,39 @@
     </div>
   <h1 align="center">Clients</h1>
 
-  <div ng-repeat="client in clients" class="col-md-6 framework-well">
-    <div class="col-md-12 well">
-      <a ng-href="/clients/{{client.id}}" color="black">
-         <h3 align="center">{{client.name}}</h3>
-         <img ng-src="{{client.image}}" height: '160', width: '210', alt: "rss feed", class: "img-circle">
-      </a>
-      <div align="center">
-      <button type="button" class="btn btn-primary" ng-click="toggleVisit(client)" ng-href="/visits/{{client.id}}", method: 'patch' data-toggle="button" aria-pressed="false" autocomplete="off">
-        Visit Today
-      </button>
+  <div ng-repeat="client in clients">
+        <div class="col-md-4">
+          <!-- Widget: user widget style 1 -->
+          <div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-yellow">
+              <div class="widget-user-image">
+              </div>
+              <!-- /.widget-user-image -->
+              <a ng-href="/clients/{{client.id}}" class="widget-user-username">{{client.name}}</a>
+              <h6 class="widget-user-desc">{{client.address}}</h6>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                <li><a href="#">Case Notes <span class="pull-right badge bg-blue">{{client.case_notes.length}}</span></a></li>
+                <li><a href="#">Goals <span class="pull-right badge bg-aqua">{{client.check_lists.length}}</span></a></li>
+                <li><a href="#">Visiting Today <span class="pull-right badge bg-green">{{client.visit_today}}</span></a></li>
+                <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
+                <li>
+                <div align="center">
+                <button type="button" class="btn btn-primary" ng-click="toggleVisit(client)" ng-href="/visits/{{client.id}}", method: 'patch' data-toggle="button" aria-pressed="false" autocomplete="off">
+                  Visit Today
+                </button>
+                <li>
+              </ul>
+            </div>
+          </div>
+          <!-- /.widget-user -->
+        </div>
     </div>
-    </div>
-  </div>
+
+
+
 
 
   </div>
