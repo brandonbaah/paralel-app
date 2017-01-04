@@ -6,6 +6,7 @@ json.role_id @user.role_id
 json.admin @user.admin
 json.director_id @user.director_id
 json.supervisor_id @user.supervisor_id
+json.image @user.image
 
 json.activities @actions.each do |action|
   json.id action.id
@@ -47,6 +48,7 @@ json.activities @actions.each do |action|
     json.activity_id comment.activity_id
     json.user_id comment.user_id
     json.first_name comment.user.first_name
+    json.image comment.user.image
   end
 end
 
